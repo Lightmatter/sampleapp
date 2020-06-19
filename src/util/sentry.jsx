@@ -24,7 +24,7 @@ Sentry.configureScope(scope => {
     // See https://www.npmjs.com/package/@sentry/node
     scope.setTag('nodejs', process.version);
     scope.setTag('runtimeEngine', isServer() ? 'server' : 'browser');
-    scope.setTag('buildTime', process.env.BUILD_TIME);
+    scope.setTag('buildTime', process.env.NEXT_PUBLIC_BUILD_TIME);
 });
 
 /**
