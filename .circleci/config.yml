@@ -51,6 +51,11 @@ jobs:
           only_for_branches: develop,master
   build:
     machine: true
+    parameters:
+      environment:
+        description: environment string
+        type: string
+        default: development
     steps:
      - checkout
      - run: docker build -t lightmatter/sampleapp:$CIRCLE_SHA1:latest \
