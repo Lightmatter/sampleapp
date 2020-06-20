@@ -130,15 +130,22 @@ workflows:
             branches:
               only: staging
 
-      - deploy:
-          name: deploy-prod
+      - build:
+          name: build-prod
           context: lightmatter
-          app-name: sampleapp-prod
+          environment: production
           requires:
             - test
           filters:
             branches:
               only: master
+
+      - deploy:
+          name: deploy-prod
+          context: lightmatter
+          app-name: sampleapp-prod
+          requires:
+            - build-prod
 
       # - ghostinspector:
       #     context: lightmatter
