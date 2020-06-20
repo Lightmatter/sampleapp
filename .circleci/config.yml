@@ -58,7 +58,7 @@ jobs:
         default: development
     steps:
      - checkout
-     - run: docker build -t lightmatter/sampleapp:$CIRCLE_SHA1:latest
+     - run: docker build -t "lightmatter/sampleapp:$CIRCLE_SHA1:latest"
         --build-arg DATABASE_URL=""
         --build-arg ALLOWED_HOSTS="*"
         --build-arg ENVIRONMENT="<< parameters.environment >>"
