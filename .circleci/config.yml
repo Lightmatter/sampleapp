@@ -57,21 +57,20 @@ jobs:
         type: string
         default: development
     steps:
-     - checkout
-     - run: |
-           docker build -t "lightmatter/sampleapp:$CIRCLE_SHA1"
-            --build-arg DATABASE_URL=""
-            --build-arg ALLOWED_HOSTS="*"
-            --build-arg ENVIRONMENT="<< parameters.environment >>"
-            --build-arg NEXT_PUBLIC_ENVIRONMENT="<< parameters.environment >>"
-            --build-arg SENTRY_DSN
-            --build-arg NEXT_PUBLIC_SENTRY_DSN
-            --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1
-            --build-arg NEXT_PUBLIC_APP_VERSION_RELEASE=$CIRCLE_SHA1
-            --build-arg NEXT_PUBLIC_API_BASE_URL=''
-            --build-arg NEXT_PUBLIC_BUILD_TIME="$(date)"
-            --build-arg SERVER_BASE_URL='http://127.0.0.1:8000'
-        .
+      - checkout
+      - run: docker build -t "lightmatter/sampleapp:$CIRCLE_SHA1"
+          --build-arg DATABASE_URL=""
+          --build-arg ALLOWED_HOSTS="*"
+          --build-arg ENVIRONMENT="<< parameters.environment >>"
+          --build-arg NEXT_PUBLIC_ENVIRONMENT="<< parameters.environment >>"
+          --build-arg SENTRY_DSN
+          --build-arg NEXT_PUBLIC_SENTRY_DSN
+          --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1
+          --build-arg NEXT_PUBLIC_APP_VERSION_RELEASE=$CIRCLE_SHA1
+          --build-arg NEXT_PUBLIC_API_BASE_URL=''
+          --build-arg NEXT_PUBLIC_BUILD_TIME="$(date)"
+          --build-arg SERVER_BASE_URL='http://127.0.0.1:8000'
+          .
 
   deploy:
     parameters:
