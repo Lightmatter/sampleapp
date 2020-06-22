@@ -8,13 +8,13 @@ import isServer from 'util/isServer';
  * Also used in pages/_app for the client side, which automatically applies it for all frontend pages.
  */
 Sentry.init({
-    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    dsn: process.env.SENTRY_DSN,
     enabled: process.env.NODE_ENV !== 'test',
-    environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
-    release: process.env.NEXT_PUBLIC_APP_VERSION_RELEASE,
+    environment: process.env.ENVIRONMENT,
+    release: process.env.APP_VERSION_RELEASE,
 });
 
-if (!process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.NODE_ENV !== 'test') {
+if (!process.env.SENTRY_DSN && process.env.NODE_ENV !== 'test') {
     // eslint-disable-next-line no-console
     console.error('Sentry DSN not defined');
 }
@@ -24,7 +24,7 @@ Sentry.configureScope(scope => {
     // See https://www.npmjs.com/package/@sentry/node
     scope.setTag('nodejs', process.version);
     scope.setTag('runtimeEngine', isServer() ? 'server' : 'browser');
-    scope.setTag('buildTime', process.env.NEXT_PUBLIC_BUILD_TIME);
+    scope.setTag('buildTime', process.env.BUILD_TIME);
 });
 
 /**

@@ -50,44 +50,35 @@ jobs:
           channel: "#sampleapp-internal"
           only_for_branches: develop,master
   build:
-    machine: true
+    docker:
+      - image: cimg/base:2020.01
     parameters:
       environment:
         description: environment string
         type: string
         default: development
-    steps:
-      - checkout
-      - run: docker build -t "lightmatter/sampleapp:$CIRCLE_SHA1"
-          --build-arg DATABASE_URL=""
-          --build-arg ALLOWED_HOSTS="*"
-          --build-arg ENVIRONMENT="<< parameters.environment >>"
-          --build-arg NEXT_PUBLIC_ENVIRONMENT="<< parameters.environment >>"
-          --build-arg SENTRY_DSN
-          --build-arg NEXT_PUBLIC_SENTRY_DSN
-          --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1
-          --build-arg NEXT_PUBLIC_APP_VERSION_RELEASE=$CIRCLE_SHA1
-          --build-arg NEXT_PUBLIC_API_BASE_URL=''
-          --build-arg NEXT_PUBLIC_BUILD_TIME="$(date)"
-          --build-arg SERVER_BASE_URL='http://127.0.0.1:8000'
-          .
-
-  deploy:
-    parameters:
       app-name:
         description: destination app
         type: string
-        default: sampleapp-dev
-    docker:
-      - image: cimg/base:2020.01
-    working_directory: /home/circleci/project
+        default: lm-sampleapp-development
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 19.03.8
+
+      # could probably put this into the docker image vs installing everytime
       - heroku/install
-      - heroku/deploy-via-git:
-          app-name: << parameters.app-name >>
+      - run: heroku container:login
+
+      - run: heroku container:push web -a << parameters.app-name >> --arg ENVIRONMENT="<< parameters.environment >>",APP_VERSION_RELEASE=$CIRCLE_SHA1,BUILD_TIME="$(date)",SERVER_BASE_URL="HTTP://127.0.0.1:8000"
+          #--SENTRY_DSN
+          #--arg SENTRY_AUTH_TOKEN
+
       - slack/status:
           channel: "#sampleapp-internal"
+
+
 
   # ghostinspector:
   #   docker:
@@ -108,45 +99,24 @@ workflows:
           name: build-dev
           context: lightmatter
           environment: development
+          app-name: lm-sampleapp-development
           requires:
             - test
           filters:
             branches:
               only: develop
 
-      - deploy:
-          name: deploy-dev
-          context: lightmatter
-          app-name: sampleapp-dev
-          requires:
-            - build-dev
-
-      - deploy:
-          name: deploy-staging
-          context: lightmatter
-          app-name: sampleapp-staging
-          requires:
-            - test
-          filters:
-            branches:
-              only: staging
 
       - build:
           name: build-prod
           context: lightmatter
           environment: production
+          app-name: lm-sampleapp-production
           requires:
             - test
           filters:
             branches:
               only: master
-
-      - deploy:
-          name: deploy-prod
-          context: lightmatter
-          app-name: sampleapp-prod
-          requires:
-            - build-prod
 
       # - ghostinspector:
       #     context: lightmatter
