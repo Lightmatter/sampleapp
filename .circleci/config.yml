@@ -70,7 +70,8 @@ jobs:
       # could probably put this into the docker image vs installing everytime
       - heroku/install
       - run: heroku container:login
-      - run: docker build --target web --tag registry.heroku.com/<< parameters.app-name >>/web  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SERVER_BASE_URL="HTTP://127.0.0.1:8000" .
+      - run: export SENTRY_DSN=$(heroku config:get SENTRY_DSN -a << parameters.app-name >>)
+      - run: docker build --target web --tag registry.heroku.com/<< parameters.app-name >>/web  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SERVER_BASE_URL="HTTP://127.0.0.1:8000" --build-arg SENTRY_DSN .
       - run: docker build --target release --tag registry.heroku.com/<< parameters.app-name >>/release  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SERVER_BASE_URL="HTTP://127.0.0.1:8000" .
       - run: docker push registry.heroku.com/<< parameters.app-name >>/web
       - run: docker push registry.heroku.com/<< parameters.app-name >>/release
