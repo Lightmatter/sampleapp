@@ -22,14 +22,14 @@ COPY package.json  yarn.lock /app/
 RUN yarn install --production && yarn cache clean
 
 ARG ENVIRONMENT
-ARG SENTRY_DSN=""
+ARG SENTRY_DSN
 arg SENTRY_AUTH_TOKEN
 arg SENTRY_PROJECT="sampleapp"
 ARG SENTRY_ORG="lightmatter"
 ARG APP_VERSION_RELEASE
-ARG BUILD_TIME="$(date)"
+ARG BUILD_TIME
 ARG API_BASE_URL=""
-ARG SERVER_BASE_URL
+ARG SERVER_BASE_URL="http://127.0.0.1:8000"
 
 ENV DJANGO_SETTINGS_MODULE=sampleapp.sampleapp.settings.heroku
 COPY . /app
