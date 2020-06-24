@@ -39,6 +39,7 @@ class UserAdmin(ImportExportMixin, DjangoUserAdmin):
                     "is_superuser",
                     "groups",
                     "user_permissions",
+                    "test_field",
                 )
             },
         ),

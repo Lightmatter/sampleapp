@@ -65,6 +65,7 @@ class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
             "active. Unselect this instead of deleting accounts."
         ),
     )
+    test_field = models.BooleanField()
 
     objects = UserManager()
 
