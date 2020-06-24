@@ -12,7 +12,7 @@ RUN mkdir /etc/service/django && \
 RUN cp /app_build/config/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 
 
-from os as app
+from os as web
 RUN mkdir app
 WORKDIR app
 COPY  requirements.txt /app
@@ -39,5 +39,10 @@ RUN DATABASE_URL="" ALLOWED_HOSTS="*" SECRET_KEY="foobar" python3.8 ./manage.py 
 CMD ["/sbin/my_init", "--skip-startup-files"]
 
 
-from app as dev
+from web as dev
 RUN python3.8 -m pip install -r requirements-dev.txt --no-cache-dir
+
+from web as release
+RUN python3.8 ./manage.py migrate --noinput
+
+
