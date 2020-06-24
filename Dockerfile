@@ -35,6 +35,7 @@ ENV DJANGO_SETTINGS_MODULE=sampleapp.sampleapp.settings.heroku
 COPY . /app
 
 RUN DATABASE_URL="" ALLOWED_HOSTS="*" SECRET_KEY="foobar" python3.8 ./manage.py collectstatic --noinput
+yarn run build
 
 CMD ["/sbin/my_init", "--skip-startup-files"]
 
