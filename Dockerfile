@@ -43,4 +43,5 @@ from web as dev
 RUN python3.8 -m pip install -r requirements-dev.txt --no-cache-dir
 
 from web as release
+COPY . /app
 CMD "python3.8 /app/manage.py migrate --noinput"
