@@ -70,7 +70,11 @@ jobs:
       # could probably put this into the docker image vs installing everytime
       - heroku/install
       - run: heroku container:login
-      - run: export SENTRY_DSN=$(heroku config:get SENTRY_DSN -a << parameters.app-name >>)
+      - run:
+          name: Define Environment Variable at Runtime
+          command: |
+            echo 'export SENTRY_DSN=$(heroku config:get SENTRY_DSN)' >> $BASH_ENV
+            source $BASH_ENV
       - run: docker build --target web --tag registry.heroku.com/<< parameters.app-name >>/web  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SENTRY_DSN .
       - run: docker build --target release --tag registry.heroku.com/<< parameters.app-name >>/release  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SENTRY_DSN .
       - run: docker push registry.heroku.com/<< parameters.app-name >>/web
