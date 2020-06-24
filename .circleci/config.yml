@@ -94,19 +94,19 @@ workflows:
   version: 2.1
   test:
     jobs:
-      - test:
-          context: lightmatter
+      # - test:
+      #     context: lightmatter
 
-      - build:
-          name: build-dev
-          context: lightmatter
-          environment: development
-          app-name: lm-sampleapp-development
-          requires:
-            - test
-          filters:
-            branches:
-              only: develop
+      # - build:
+      #     name: build-dev
+      #     context: lightmatter
+      #     environment: development
+      #     app-name: lm-sampleapp-development
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: develop
 
 
       - build:
@@ -114,8 +114,8 @@ workflows:
           context: lightmatter
           environment: production
           app-name: lm-sampleapp-production
-          requires:
-            - test
+          # requires:
+          #   - test
           filters:
             branches:
               only: master
