@@ -4,7 +4,6 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 
-
 from .base import *
 
 SESSION_COOKIE_SECURE = True
@@ -83,5 +82,5 @@ sentry_sdk.init(
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True,
     environment=env("ENVIRONMENT"),
-    release="my-project-name@2.3.12",
+    release=env("APP_VERSION_RELEASE"),
 )
