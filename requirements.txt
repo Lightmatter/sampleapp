@@ -58,5 +58,5 @@ django-anymail[mailgun]==7.1.0
 
 
 #Wagtail
-wagtail==2.8
+wagtail==2.8.2
 django-taggit==1.0.0
