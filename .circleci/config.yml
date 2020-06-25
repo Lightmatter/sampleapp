@@ -69,7 +69,7 @@ jobs:
 
       # could probably put this into the docker image vs installing everytime
       - heroku/install
-      - run: npm install @sentry/cli
+      - run: curl -sL https://sentry.io/get-cli/ | bash # install sentry cli
 
       - run: heroku container:login
       - run:
