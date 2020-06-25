@@ -81,11 +81,11 @@ jobs:
       - run: docker build --target release --tag registry.heroku.com/<< parameters.app-name >>/release  --build-arg ENVIRONMENT="<< parameters.environment >>" --build-arg APP_VERSION_RELEASE=$CIRCLE_SHA1 --build-arg BUILD_TIME="$(date)" --build-arg SENTRY_DSN .
       - run: docker push registry.heroku.com/<< parameters.app-name >>/web
       - run: docker push registry.heroku.com/<< parameters.app-name >>/release
-      - run: sentry-cli releases new -p sampleapp --org lightmatter $CIRCLE_SHA1
-      - run: sentry-cli releases set-commits --auto $CIRCLE_SHA1
+      - run: sentry-cli releases --org lightmatter new -p sampleapp $CIRCLE_SHA1
+      - run: sentry-cli releases --org lightmatter set-commits --auto $CIRCLE_SHA1
       - run: heroku container:release web release -a << parameters.app-name >>
-      - run: sentry-cli releases finalize $CIRCLE_SHA1
-      - run: sentry-cli releases deploys $CIRCLE_SHA1 new -e << parameters.environment >>
+      - run: sentry-cli releases --org lightmatter finalize $CIRCLE_SHA1
+      - run: sentry-cli releases --org deploys $CIRCLE_SHA1 new -e << parameters.environment >>
 
       #- run: heroku container:push web -a << parameters.app-name >> --arg ENVIRONMENT="<< parameters.environment >>",APP_VERSION_RELEASE=$CIRCLE_SHA1,BUILD_TIME="$(date)",SERVER_BASE_URL="HTTP://127.0.0.1:8000"
           #--SENTRY_DSN
