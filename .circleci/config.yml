@@ -116,7 +116,7 @@ workflows:
           name: build-dev
           context: lightmatter
           environment: development
-          app-name: sampleapp-development
+          app-name: lm-sampleapp-development
           requires:
             - test
           filters:
@@ -128,7 +128,7 @@ workflows:
           name: build-prod
           context: lightmatter
           environment: production
-          app-name: sampleapp-production
+          app-name: lm-sampleapp-production
           requires:
             - test
           filters:
