@@ -7,7 +7,7 @@ from sentry_sdk.integrations.redis import RedisIntegration
 from .base import *
 
 SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False  # let nginx handle
 DATABASES = {}
 DATABASES["default"] = env.db()
 
