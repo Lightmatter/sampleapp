@@ -35,8 +35,8 @@ const password = Yup.string().required(REQUIRED).min(6, TOO_SHORT);
 const email = Yup.string().email(EMAIL).required(REQUIRED);
 
 const UserDetailSchema = {
-  first_name: name,
-  last_name: name,
+  firstName: name,
+  lastName: name,
 };
 
 const SetPassSchema = {
@@ -64,18 +64,18 @@ export const ForgotPassSchema = Yup.object().shape({
 });
 
 export const ResetPassSchema = Yup.object().shape({
-  new_password: password,
-  re_new_password: password.equalTo(
-    'new_password',
+  newPassword: password,
+  reNewPassword: password.equalTo(
+    'newPassword',
     'The Two Passwords Must Match'
   ),
 });
 
 export const ChangePassSchema = Yup.object().shape({
-  current_password: password,
-  new_password: password,
-  re_new_password: password.equalTo(
-    'new_password',
+  currentPassword: password,
+  newPassword: password,
+  reNewPassword: password.equalTo(
+    'newPassword',
     'The Two Passwords Must Match'
   ),
 });
@@ -162,7 +162,6 @@ let setAuthenticated;
 export function useCurrentUserSWR({ initialUser }) {
   [isAuthenticated, setAuthenticated] = useState(Boolean(initialUser));
   const { enqueueSnackbar } = useSnackbar();
-
   const options = {
     shouldRetryOnError: false,
     onSuccess: () => {
