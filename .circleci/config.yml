@@ -36,6 +36,7 @@ jobs:
       - run: poetry run coverage run --source='.' manage.py test
       - store_test_results:
           path: test_reports
+      - run: poetry run coverage xml
       - codecov/upload
       - slack/status:
           fail_only: true
