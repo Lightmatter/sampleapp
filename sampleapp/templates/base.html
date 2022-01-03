@@ -1,0 +1,55 @@
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}">
+
+
+    {% load django_vite %}
+    {% vite_hmr_client %}
+    {% vite_asset 'js/system.ts' %}
+    {% vite_asset 'js/main.ts' %}
+    {% vite_asset 'js/htmx.js' %}
+    {% vite_asset 'fontawesome/fontawesome.js' %}
+
+    {% load django_htmx %}
+    {% django_htmx_script %}
+
+    {% block extra_head %}
+    <title>Lightmatter</title>
+    {% endblock extra_head %}
+
+    <script>
+      // django debug toolbar
+      document.addEventListener("htmx:beforeRequest", (event) => {
+        if ("djdt" in window) {
+          window.djdt.abort();
+        }
+      });
+      document.addEventListener("htmx:afterSettle", (event) => {
+        if ("djdt" in window) {
+          window.djdt.init();
+        }
+      });
+    </script>
+  </head>
+  <body hx-boost="true" hx-push-url="true" v-scope class="{% block body_class %}{% endblock body_class %}" >
+      {% include "header.html" %}
+
+      <div id="main">
+          {% block content %}
+          {% endblock content %}
+      </div>
+
+      <ul class="messages" id="messages" >
+      {% include "util/messages.html" %}
+      </ul>
+      {% include "footer.html" %}
+  </body>
+  <script>
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    })
+  </script>
+</html>
