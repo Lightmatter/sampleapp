@@ -89,7 +89,7 @@ exclude_lines = [
 ]
 
 ignore_errors = true
-omit = ["*/migrations/*","manage.py"]
+omit = ["*/migrations/*","manage.py","sampleapp/config/*"]
 
 [tool.isort]
 line_length = "92"
