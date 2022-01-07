@@ -2,10 +2,9 @@ previewsEnabled: true
 previewsExpireAfterDays: 5
 services:
     - type: web
-      name: sampleapp-prod
+      name: sampleapp
       env: python
       previewPlan: starter
-      branch: main
       healthCheckPath: /
       buildCommand: "./build.sh"
       startCommand: poetry run gunicorn --worker-tmp-dir /dev/shm  -w 4 -k uvicorn.workers.UvicornWorker --log-file=- sampleapp.config.asgi:application --preload
@@ -16,12 +15,12 @@ services:
         - key: DJANGO_SECRET_KEY
           generateValue: true
         - key: DJANGO_SETTINGS_MODULE
-          generateValue: "sampleapp.config.settings.prod"
+          value: "sampleapp.config.settings.prod"
         - key: DJANGO_ALLOWED_HOSTS
           fromService:
             type: web
             envVarKey: RENDER_EXTERNAL_HOSTNAME
-            name: sampleapp-prod
+            name: sampleapp
         - key: DJANGO_DEBUG
           value: false
         - key: DATABASE_URL
@@ -32,13 +31,13 @@ services:
           fromService:
             type: web
             envVarKey: RENDER_SERVICE_NAME
-            name: sampleapp-prod
+            name: sampleapp
             previewValue: TEST
         - key: SENTRY_RELEASE
           fromService:
             type: web
             envVarKey: RENDER_GIT_COMMIT
-            name: sampleapp-prod
+            name: sampleapp
         - key: DJANGO_AWS_ACCESS_KEY_ID
           fromService:
             type: web
@@ -50,7 +49,7 @@ services:
             envVarKey: MINIO_ROOT_USER
             name: minio
         - key: DJANGO_AWS_STORAGE_BUCKET_NAME
-          value: sampleapp-prod
+          value: sampleapp
 
     - type: web
       name: minio
@@ -94,7 +93,3 @@ envVarGroups:
           sync: false
         - key: SENTRY_PROJECT
           value: sampleapp
-        - key: SENTRY_ORG
-          value: lightmatter
-        - key: SENTRY_AUTH_TOKEN
-          sync: false
