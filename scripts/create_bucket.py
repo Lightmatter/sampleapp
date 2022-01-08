@@ -19,6 +19,7 @@ source_s3 = boto3.resource(
 
 
 def create_bucket():
+    print(f"creating bucket {bucketname}")
     source_s3.create_bucket(Bucket=bucketname)
 
 
