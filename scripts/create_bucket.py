@@ -1,5 +1,6 @@
 import boto3
 from botocore.client import Config
+from botocore.exceptions import ClientError
 from os import environ as env
 
 aws_access_key_id = env["DJANGO_AWS_ACCESS_KEY_ID"]
@@ -8,7 +9,7 @@ endpoint_url = env["DJANGO_AWS_S3_ENDPOINT_URL"]
 bucketname = env["DJANGO_AWS_STORAGE_BUCKET_NAME"]
 api_port = ":9000"
 
-source_s3 = boto3.resource(
+source_s3 = boto3.client(
     "s3",
     endpoint_url=endpoint_url,
     aws_access_key_id=aws_access_key_id,
@@ -19,8 +20,12 @@ source_s3 = boto3.resource(
 
 
 def create_bucket():
-    print(f"creating bucket {bucketname}")
-    source_s3.create_bucket(Bucket=bucketname)
+    try:
+        source_s3.head_bucket(Bucket=bucketname)
+        print(f"bucket {bucketname} exists!")
+    except ClientError:
+        print(f"creating bucket {bucketname}")
+        source_s3.create_bucket(Bucket=bucketname)
 
 
 if __name__ == "__main__":
