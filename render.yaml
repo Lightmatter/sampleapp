@@ -48,7 +48,7 @@ services:
         - key: DJANGO_AWS_SECRET_ACCESS_KEY
           fromService:
             type: web
-            envVarKey: MINIO_ROOT_USER
+            envVarKey: MINIO_ROOT_PASSWORD
             name: minio
         - key: DJANGO_AWS_S3_ENDPOINT_URL
           fromService:
