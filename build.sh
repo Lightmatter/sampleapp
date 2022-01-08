@@ -10,4 +10,4 @@ npm run build
 python manage.py collectstatic --no-input
 python manage.py migrate
 
-./scripts/create_bucket.py
+poetry run python ./scripts/create_bucket.py
