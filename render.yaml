@@ -72,7 +72,7 @@ services:
         - key: MINIO_ROOT_PASSWORD
           generateValue: true
         - key: PORT
-          value: 10000
+          value: 9000
 
     - type: pserv
       name: redis
