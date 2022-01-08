@@ -32,7 +32,6 @@ services:
             type: web
             envVarKey: RENDER_SERVICE_NAME
             name: sampleapp
-            previewValue: TEST
         - key: SENTRY_RELEASE
           fromService:
             type: web
