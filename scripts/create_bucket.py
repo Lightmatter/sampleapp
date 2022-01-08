@@ -18,7 +18,7 @@ source_s3 = boto3.resource(
 
 
 def create_bucket():
-    source_s3.create_bucket(bucketname)
+    source_s3.create_bucket(Bucket=bucketname)
 
 
 if __name__ == "__main__":
