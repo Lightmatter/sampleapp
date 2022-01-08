@@ -25,7 +25,11 @@ def create_bucket():
         print(f"bucket {bucketname} exists!")
     except ClientError:
         print(f"creating bucket {bucketname}")
-        source_s3.create_bucket(Bucket=bucketname)
+        try:
+            source_s3.create_bucket(Bucket=bucketname)
+        except ClientError as e:
+            print("Unable to contact minio")
+            print(e)
 
 
 if __name__ == "__main__":
