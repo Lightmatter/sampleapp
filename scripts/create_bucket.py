@@ -10,7 +10,7 @@ api_port = ":9000"
 
 source_s3 = boto3.resource(
     "s3",
-    endpoint_url=endpoint_url + api_port,
+    endpoint_url=endpoint_url,
     aws_access_key_id=aws_access_key_id,
     aws_secret_access_key=aws_secret_access_key,
     config=Config(signature_version="s3v4"),
