@@ -1,0 +1,81 @@
+repos:
+
+#python
+-   repo: local
+    hooks:
+    -   id: black
+        name: black
+        entry: poetry run black
+        types: [python]
+        language: system
+-   repo: local
+    hooks:
+    -   id: isort
+        name: isort
+        language: system
+        entry: poetry run isort
+        types: [python]
+-   repo: local
+    hooks:
+    -   id: flakehell
+        name: flakehell
+        entry: poetry run flakehell lint
+        types: [python]
+        language: system
+-   repo: local
+    hooks:
+    -   id: djlint
+        name: djlint
+        entry: poetry run djlint --reformat
+        language: system
+        types_or: [html]
+
+## system
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v2.30.0
+    hooks:
+    -   id: pyupgrade
+        args: [--py39-plus]
+-   repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.4.0
+    hooks:
+    -   id: django-upgrade
+        args: [--target-version, "3.2"]
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+    -   id: check-yaml
+#    -   id: end-of-file-fixer
+#    -   id: trailing-whitespace
+    -   id: debug-statements
+    -   id: mixed-line-ending
+-   repo: https://github.com/pycqa/doc8
+    rev: 0.10.1
+    hooks:
+    -   id: doc8
+# TODO:  https://github.com/adamchainz/pre-commit-oxipng
+
+## frontend
+-   repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.5.1
+    hooks:
+    -   id: prettier
+        files: ^frontend/
+        types_or: [javascript, ts]
+-   repo: local
+    hooks:
+    -   id: eslint
+        name: eslint
+        entry: npx eslint --fix
+        files: ^frontend/
+        language: system
+        types_or: [javascript, ts]
+-   repo: local
+    hooks:
+    -   id: stylelint
+        name: stylelint
+        entry: npx stylelint --fix --allow-empty-input
+        files: ^frontend/
+        language: system
+        exclude: frontent/fontawesome/.*
+        types_or: [css, scss]
