@@ -28,15 +28,19 @@ class LoginTest(PlaywrightTestCase):
             is_staff=True,
             password=make_password(self.password),
         )
-        self.url = reverse("account_login")
+        self.url = reverse("user:account__welcome")
 
     def test_login(self):
         page = self.context.new_page()
+        page.set_default_timeout(0)
         page.goto(f"{self.live_server_url}{self.url}")
-        page.wait_for_selector("text=Sign In")
-        page.fill("[name=login]", self.user.email)
+        page.wait_for_selector("text=Log in/Sign up")
+        page.fill("[name=email]", self.user.email)
+        page.click("button")
+        page.wait_for_selector(f"text=Welcome back, {self.user.first_name}!")
         page.fill("[name=password]", self.password)
         page.click("button")
+        page.pause()
         actual = page.url.removeprefix(self.live_server_url)
         self.assertEqual(actual, "/")
 

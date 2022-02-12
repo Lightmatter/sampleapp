@@ -19,13 +19,9 @@
                 </div>
             </div>
             <div class="ml-10 space-x-4">
-                <a href="{% url "account_login" %}"
-                   class="inline-block bg-grey-500 py-2 px-4 border border-transparent rounded-md text-base font-medium text-white hover:bg-opacity-75">
-                    Sign in
-                </a>
-                <a href="{% url "account_signup" %}"
+                <a href="{% url "user:account__welcome" %}"
                    class="inline-block bg-white py-2 px-4 border border-transparent rounded-md text-base font-medium text-grey-600 hover:bg-grey-50">
-                    Sign up
+                    Sign in
                 </a>
             </div>
         </div>

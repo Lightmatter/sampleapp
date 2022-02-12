@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 const fg = require('fast-glob');
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+
 
 
 export default defineConfig({
@@ -23,26 +23,4 @@ export default defineConfig({
     },
     outDir:  '../sampleapp/static', // puts the manifest.json in PROJECT_ROOT/static/
   },
-  plugins: [
-    {
-      name: 'watch-external', // https://stackoverflow.com/questions/63373804/rollup-watch-include-directory/63548394#63548394
-      async buildStart(){
-        const files = await fg(['sampleapp/templates/**/*']);
-        for(let file of files){
-          this.addWatchFile(file);
-        }
-      }
-    },
-    {
-      name: 'reloadHtml',
-      handleHotUpdate({ file, server }) {
-        if (file.endsWith('.html')) {
-          server.ws.send({
-            type: 'full-reload',
-            path: '*',
-          });
-        }
-      },
-    }
-  ],
 });

@@ -300,6 +300,13 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
+# https://django-allauth.readthedocs.io/en/latest/forms.html#account-forms
+ACCOUNT_FORMS = {
+    "login": "sampleapp.user.forms.LoginForm",
+    "signup": "sampleapp.user.forms.SignupForm",
+}
 
 
 # Install https://github.com/gruns/icecream for better printing

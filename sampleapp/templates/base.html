@@ -32,7 +32,6 @@
         </script>
     </head>
     <body hx-boost="true"
-          v-scope
           class="{% block body_class %}{% endblock body_class %}">
         {% include "header.html" %}
         <div id="main">
@@ -43,7 +42,6 @@
             </ul>
         </div>
         {% include "footer.html" %}
-        {% include "components.html" %}
     </body>
     <script>
     if (getCookie === undefined) {
@@ -63,8 +61,11 @@
         return cookieValue;
       }
       document.body.addEventListener('htmx:configRequest', (event) => {
-        event.detail.headers['X-CSRFToken'] = getCookie('{{cookiecutter.repo_name}}_csrftoken');
+        event.detail.headers['X-CSRFToken'] = getCookie('sampleapp_csrftoken');
       })
     };
     </script>
+    {% include "components.html" %}
+    {% block components %}
+    {% endblock components %}
 </html>

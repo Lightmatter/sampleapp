@@ -9,6 +9,7 @@ A short description of the project.
 ### pdbpp and sticky by default config
 ### PLAYWRIGHT
 webcomponents w/ alpine
+Alpine dev tools
 # setting up
 
 ### UPGRADING PYTHON PACKAGES

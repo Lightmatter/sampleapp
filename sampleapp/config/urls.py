@@ -34,7 +34,7 @@ if settings.DEBUG:
 
 
 urlpatterns += [
-    path("users/", include("sampleapp.user.urls", namespace="user")),
+    path("account/", include("sampleapp.user.urls", namespace="user")),
     path("account/", include("allauth.urls")),
     path("admin/", admin.site.urls),
     path("", include("sampleapp.home.urls")),

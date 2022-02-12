@@ -9,6 +9,12 @@ declare global {
   }
 }
 
+// @ts-expect-error // todo: make a types file for x-widget
+const { htmx } = window;
 window.Alpine = Alpine;
 Alpine.plugin(xWidget);
 Alpine.start();
+
+// if (import.meta.hot) {
+//   import.meta.hot.on("special-update", (data) => {});
+// }
