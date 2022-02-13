@@ -161,7 +161,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-DJANGO_VITE_ASSETS_PATH = root.path("static")
+DJANGO_VITE_ASSETS_PATH = root.path("static_source")
 DJANGO_VITE_DEV_MODE = DEBUG
 
 # MEDIA
