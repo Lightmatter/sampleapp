@@ -1,6 +1,5 @@
 import "htmx.org";
 // @ts-expect-error // todo: make a types file for x-widget
-import xWidget from "x-widget";
 import Alpine from "alpinejs";
 
 declare global {
@@ -10,9 +9,8 @@ declare global {
 }
 
 // @ts-expect-error // todo: make a types file for x-widget
-const { htmx } = window;
+// const { htmx } = window;
 window.Alpine = Alpine;
-Alpine.plugin(xWidget);
 Alpine.start();
 
 // if (import.meta.hot) {
