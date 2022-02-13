@@ -60,11 +60,18 @@ repos:
     hooks:
     -   id: tsc
         name: tsc
-        entry: npx tsc --noEmit
+        entry: npx tsc --noEmit --skipLibCheck
         files: ^frontend/
         language: system
-        exclude: frontent/fontawesome/.*, node_modules/.*
         types_or: [ts, javascript]
+        exclude: |
+            (?x)^(
+            postcss.config.js|
+            tailwind.config.js|
+            vite.config.js|
+            frontend/fontawesome/.*|
+            node_modules/.*
+            )
 -   repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.5.1
     hooks:
