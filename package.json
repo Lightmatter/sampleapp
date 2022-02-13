@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "alpinejs": "^3.8.1",
-    "x-widget": "^0.2.7",
     "htmx.org": "^1.6.1"
   }
 }

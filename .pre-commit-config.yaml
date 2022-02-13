@@ -56,6 +56,15 @@ repos:
 # TODO:  https://github.com/adamchainz/pre-commit-oxipng
 
 ## frontend
+-   repo: local
+    hooks:
+    -   id: tsc
+        name: tsc
+        entry: npx tsc --noEmit
+        files: ^frontend/
+        language: system
+        exclude: frontent/fontawesome/.*, node_modules/.*
+        types_or: [ts, javascript]
 -   repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.5.1
     hooks:
