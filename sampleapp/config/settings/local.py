@@ -31,15 +31,15 @@ INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#prerequisites
-# INSTALLED_APPS += ["debug_toolbar"]  # noqa F405
-# # ensure that DJDT has access to the htmx attrs
-# MIDDLEWARE.remove("django_htmx.middleware.HtmxMiddleware")
+INSTALLED_APPS += ["debug_toolbar"]  # noqa F405
+# ensure that DJDT has access to the htmx attrs
+MIDDLEWARE.remove("django_htmx.middleware.HtmxMiddleware")
 
-# # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
-# MIDDLEWARE = [
-#     "django_htmx.middleware.HtmxMiddleware",
-#     #"sampleapp.util.middleware.DebugToolbarMiddleware",
-# ] + MIDDLEWARE  # noqa F405
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
+MIDDLEWARE = [
+    "django_htmx.middleware.HtmxMiddleware",
+    "sampleapp.util.middleware.DebugToolbarMiddleware",
+] + MIDDLEWARE  # noqa F405
 # https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html#debug-toolbar-config
 
 DEBUG_TOOLBAR_PANELS = [
@@ -78,15 +78,15 @@ class InvalidVariable(str):
 
 
 TEMPLATES[0]["OPTIONS"]["string_if_invalid"] = InvalidVariable("BAD TEMPLATE VARIABLE: %s")
-
-
 import sys
 
 TESTING = sys.argv[1:2] == ["test"]
 if TESTING:
-    import logging
-
-    logging.disable(logging.CRITICAL)
+    MIDDLEWARE.remove("sampleapp.util.middleware.DebugToolbarMiddleware")
+    INSTALLED_APPS.remove("debug_toolbar")
     PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
-    DEBUG = False
+    import subprocess
+
+    subprocess.run(["npm", "run", "build"])
+    DJANGO_VITE_DEV_MODE = False
     TEMPLATE_DEBUG = False

@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import LiveServerTestCase, TestCase, override_settings
 
 import datetime
 import os
 import time
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from playwright.sync_api import sync_playwright
 
 from .models import TestFileModel
@@ -43,7 +42,8 @@ class FileUrlTest(TestCase):
         self.assertEqual(actual, expected)
 
 
-class PlaywrightTestCase(StaticLiveServerTestCase):
+@override_settings(DEBUG=True)
+class PlaywrightTestCase(LiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
@@ -53,7 +53,8 @@ class PlaywrightTestCase(StaticLiveServerTestCase):
 
     def setUp(self):
         self.context = self.browser.new_context()
-        self.context.set_default_timeout(30)
+        if not os.environ.get("PWDEBUG"):
+            self.context.set_default_timeout(3000)
 
     @classmethod
     def tearDownClass(cls):

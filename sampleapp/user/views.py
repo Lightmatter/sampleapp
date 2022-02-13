@@ -48,7 +48,7 @@ class LoginView(AllAuthLoginView):
         if hasattr(self.request, "prefetched_user"):
             user = self.request.prefetched_user
         else:
-            user = User.objects.get(email=self.get_form().data["login"])
+            user = User.objects.get(email__iexact=self.get_form().data["login"])
         ctx["user"] = user
         return ctx
 
@@ -68,7 +68,7 @@ def welcome(request):
     if not request.htmx or not form.is_valid():
         return TemplateResponse(request, "account/welcome.html", {"form": form})
     try:
-        email = form.data["email"]
+        email = form.cleaned_data.get("email")
         request.prefetched_user = User.objects.get(email=email)
         return login(request)
     except User.DoesNotExist:

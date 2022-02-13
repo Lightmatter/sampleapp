@@ -32,33 +32,39 @@ class LoginTest(PlaywrightTestCase):
 
     def test_login(self):
         page = self.context.new_page()
-        page.set_default_timeout(0)
         page.goto(f"{self.live_server_url}{self.url}")
         page.wait_for_selector("text=Log in/Sign up")
         page.fill("[name=email]", self.user.email)
+        # TODO: Test for email is required attr
         page.click("button")
         page.wait_for_selector(f"text=Welcome back, {self.user.first_name}!")
+        # TODO: Test for password is required attr
         page.fill("[name=password]", self.password)
         page.click("button")
+        page.wait_for_load_state("networkidle")
         actual = page.url.removeprefix(self.live_server_url)
         self.assertEqual(actual, "/")
 
     def test_login_email_case_insensitive(self):
         page = self.context.new_page()
         page.goto(f"{self.live_server_url}{self.url}")
-        page.wait_for_selector("text=Sign In")
-        page.fill("[name=login]", self.user.email.upper())
+        page.wait_for_selector("text=Log in/Sign up")
+        page.fill("[name=email]", self.user.email.upper())
+        page.click("button")
+        page.wait_for_selector(f"text=Welcome back, {self.user.first_name}!")
         page.fill("[name=password]", self.password)
         page.click("button")
+        page.wait_for_load_state("networkidle")
         actual = page.url.removeprefix(self.live_server_url)
         self.assertEqual(actual, "/")
 
     def test_login_badpass(self):
         page = self.context.new_page()
         page.goto(f"{self.live_server_url}{self.url}")
-        page.wait_for_selector("text=Sign In")
-        page.fill("[name=login]", self.user.email.upper())
-        page.fill("[name=password]", self.password.upper())
+        page.wait_for_selector("text=Log in/Sign up")
+        page.fill("[name=email]", self.user.email.upper())
+        page.click("button")
+        page.fill("[name=password]", "BUGSRULE")
         page.click("button")
         error = page.text_content(
             "text=The e-mail address and/or password you specified are not correct."
@@ -66,11 +72,27 @@ class LoginTest(PlaywrightTestCase):
         self.assertTrue(error)
 
 
+class RegistrationLiveTest(PlaywrightTestCase):
+    def setUp(self):
+        super().setUp()
+        self.password = "yeahmanitsarealpass"
+        self.form_data = self.login_form_data = {
+            "email": "ben@coolguy.com",
+            "email2": "ben@coolguy.com",
+            "password1": self.password,
+            "password2": self.password,
+            "first_name": "ben",
+            "last_name": "beecher",
+        }
+        self.url = reverse("account_signup")
+
+
 class RegistrationTest(TestCase):
     def setUp(self):
         self.password = "yeahmanitsarealpass"
         self.form_data = self.login_form_data = {
             "email": "ben@coolguy.com",
+            "email2": "ben@coolguy.com",
             "password1": self.password,
             "password2": self.password,
             "first_name": "ben",
