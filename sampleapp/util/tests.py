@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.middleware.csrf import _get_new_csrf_string, _mask_cipher_secret
 from django.test import TestCase
 
 import datetime
@@ -54,15 +53,7 @@ class PlaywrightTestCase(StaticLiveServerTestCase):
 
     def setUp(self):
         self.context = self.browser.new_context()
-        self.context.add_cookies(
-            [
-                {
-                    "name": "sampleapp_csrftoken",
-                    "value": _mask_cipher_secret(_get_new_csrf_string()),
-                    "url": self.live_server_url,
-                }
-            ]
-        )
+        self.context.set_default_timeout(30)
 
     @classmethod
     def tearDownClass(cls):
