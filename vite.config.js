@@ -21,6 +21,6 @@ export default defineConfig({
         system: resolve(__dirname, './frontend/js/system.ts'),
       }
     },
-    outDir:  '../sampleapp/static_source', // puts the manifest.json in PROJECT_ROOT/static_source/
+    outDir:  '../sampleapp/static', // puts the manifest.json in PROJECT_ROOT/static_source/
   },
 });
