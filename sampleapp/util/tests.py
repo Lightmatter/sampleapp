@@ -1,10 +1,10 @@
-from django.conf import settings
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import LiveServerTestCase, TestCase, override_settings
-
 import datetime
 import os
 import time
+
+from django.conf import settings
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.test import LiveServerTestCase, TestCase, override_settings
 from playwright.sync_api import sync_playwright
 
 from .models import TestFileModel
@@ -18,11 +18,7 @@ class FileUrlTest(TestCase):
         timestamp = int(time.time())
         actual = file_url_obj("trash", "some_filename")
         now = datetime.datetime.now()
-        expected = (
-            "uploads/foo/{0.year:04}/{0.month:02}/{0.day:02}/{1}/some_filename".format(
-                now, timestamp
-            )
-        )
+        expected = f"uploads/foo/{now.year:04}/{now.month:02}/{now.day:02}/{timestamp}/some_filename"
         self.assertEqual(actual, expected)
 
     def test_file_upload(self):
@@ -35,9 +31,7 @@ class FileUrlTest(TestCase):
         actual = x.file_field.url
         expected = (
             settings.MEDIA_URL
-            + "uploads/filez/{0.year:04}/{0.month:02}/{0.day:02}/{1}/some_file.txt".format(
-                now, timestamp
-            )
+            + f"uploads/filez/{now.year:04}/{now.month:02}/{now.day:02}/{timestamp}/some_file.txt"
         )
         self.assertEqual(actual, expected)
 
@@ -54,7 +48,7 @@ class PlaywrightTestCase(LiveServerTestCase):
     def setUp(self):
         self.context = self.browser.new_context()
         if not os.environ.get("PWDEBUG"):
-            self.context.set_default_timeout(3000)
+            self.context.set_default_timeout(1000)
 
     @classmethod
     def tearDownClass(cls):

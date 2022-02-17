@@ -1,5 +1,7 @@
+# pylint: skip-file
 import logging
 import re
+
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
@@ -98,7 +100,7 @@ WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
 
 # MEDIA
 # ------------------------------------------------------------------------------
-DEFAULT_FILE_STORAGE = "sampleapp.util.storage.MediaRootS3Boto3Storage"
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 MEDIA_URL = f"https://{aws_s3_domain}/media/"
 
 

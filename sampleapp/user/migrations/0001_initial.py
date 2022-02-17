@@ -1,7 +1,6 @@
-from django.db import migrations, models
-
 import django.utils.timezone
 import model_utils.fields
+from django.db import migrations, models
 
 from sampleapp.user.models import UserManager
 

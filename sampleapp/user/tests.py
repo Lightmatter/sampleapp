@@ -1,8 +1,8 @@
-from django.test import TestCase
-from django.urls import reverse
+from http import HTTPStatus
 
 from django.contrib.auth.hashers import make_password
-from http import HTTPStatus
+from django.test import TestCase
+from django.urls import reverse
 from model_bakery import baker
 
 from sampleapp.util.tests import PlaywrightTestCase
@@ -84,7 +84,92 @@ class RegistrationLiveTest(PlaywrightTestCase):
             "first_name": "ben",
             "last_name": "beecher",
         }
-        self.url = reverse("account_signup")
+        self.url = reverse("user:account_welcome")
+
+    def test_register(self):
+        page = self.context.new_page()
+        page.goto(f"{self.live_server_url}{self.url}")
+        page.click('input[name="email"]')
+        page.fill('input[name="email"]', self.form_data["email"])
+        page.click("text=Continue")
+        page.click('[placeholder="E-mail\\ address\\ confirmation"]')
+        page.fill(
+            '[placeholder="E-mail\\ address\\ confirmation"]', self.form_data["email2"]
+        )
+        page.click('[placeholder="First\\ Name"]')
+        page.fill('[placeholder="First\\ Name"]', self.form_data["first_name"])
+        # Click [placeholder="Last\ Name"]
+        page.click('[placeholder="Last\\ Name"]')
+        # Fill [placeholder="Last\ Name"]
+        page.fill('[placeholder="Last\\ Name"]', self.form_data["last_name"])
+        # Click [placeholder="Password"]
+        page.click('[placeholder="Password"]')
+        # Fill [placeholder="Password"]
+        page.fill('[placeholder="Password"]', self.password)
+        # Click [placeholder="Password\ \(again\)"]
+        page.click('[placeholder="Password\\ \\(again\\)"]')
+        # Fill [placeholder="Password\ \(again\)"]
+        page.fill('[placeholder="Password\\ \\(again\\)"]', self.password)
+        with page.expect_navigation(wait_until="networkidle"):
+            page.click("text=Continue")
+        actual = page.url.removeprefix(self.live_server_url)
+        self.assertEqual(actual, "/")
+
+    def test_register_email_no_match(self):
+        page = self.context.new_page()
+        page.goto(f"{self.live_server_url}{self.url}")
+        page.click('input[name="email"]')
+        page.fill('input[name="email"]', self.form_data["email"])
+        page.click("text=Continue")
+        page.click('[placeholder="E-mail\\ address\\ confirmation"]')
+        page.fill('[placeholder="E-mail\\ address\\ confirmation"]', "email@bademail.com")
+        page.click('[placeholder="First\\ Name"]')
+        page.fill('[placeholder="First\\ Name"]', self.form_data["first_name"])
+        # Click [placeholder="Last\ Name"]
+        page.click('[placeholder="Last\\ Name"]')
+        # Fill [placeholder="Last\ Name"]
+        page.fill('[placeholder="Last\\ Name"]', self.form_data["last_name"])
+        # Click [placeholder="Password"]
+        page.click('[placeholder="Password"]')
+        # Fill [placeholder="Password"]
+        page.fill('[placeholder="Password"]', self.password)
+        # Click [placeholder="Password\ \(again\)"]
+        page.click('[placeholder="Password\\ \\(again\\)"]')
+        # Fill [placeholder="Password\ \(again\)"]
+        page.fill('[placeholder="Password\\ \\(again\\)"]', "somethingwronggarbage")
+
+        page.click("text=Continue")
+
+        error = page.text_content("text=You must type the same email each time.")
+        self.assertTrue(error)
+
+    def test_register_pass_no_match(self):
+        page = self.context.new_page()
+        page.goto(f"{self.live_server_url}{self.url}")
+        page.click('input[name="email"]')
+        page.fill('input[name="email"]', self.form_data["email"])
+        page.click("text=Continue")
+        page.click('[placeholder="E-mail\\ address\\ confirmation"]')
+        page.fill(
+            '[placeholder="E-mail\\ address\\ confirmation"]', self.form_data["email2"]
+        )
+        page.click('[placeholder="First\\ Name"]')
+        page.fill('[placeholder="First\\ Name"]', self.form_data["first_name"])
+        # Click [placeholder="Last\ Name"]
+        page.click('[placeholder="Last\\ Name"]')
+        # Fill [placeholder="Last\ Name"]
+        page.fill('[placeholder="Last\\ Name"]', self.form_data["last_name"])
+        # Click [placeholder="Password"]
+        page.click('[placeholder="Password"]')
+        # Fill [placeholder="Password"]
+        page.fill('[placeholder="Password"]', self.password)
+        # Click [placeholder="Password\ \(again\)"]
+        page.click('[placeholder="Password\\ \\(again\\)"]')
+        # Fill [placeholder="Password\ \(again\)"]
+        page.fill('[placeholder="Password\\ \\(again\\)"]', "somethingwronggarbage")
+        page.click("text=Continue")
+        error = page.text_content("text=You must type the same password each time.")
+        self.assertTrue(error)
 
 
 class RegistrationTest(TestCase):

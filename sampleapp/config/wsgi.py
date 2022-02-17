@@ -1,3 +1,5 @@
+# pylint: disable-all
+
 """
 WSGI config for sampleapp project.
 This module contains the WSGI application used by Django's development server
@@ -10,9 +12,9 @@ that later delegates to the Django one. For example, you could introduce WSGI
 middleware here, or combine a Django application with an application of another
 framework.
 """
-from django.core.wsgi import get_wsgi_application
-
 import os
+
+from django.core.wsgi import get_wsgi_application
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use

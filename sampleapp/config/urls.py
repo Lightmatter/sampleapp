@@ -1,8 +1,7 @@
 from django.conf import settings
+from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
-
-from django.contrib import admin
 
 urlpatterns = []
 

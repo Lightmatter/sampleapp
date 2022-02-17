@@ -1,11 +1,10 @@
-from django.template.response import TemplateResponse
-from django.views.generic import RedirectView
-
 from allauth.account.views import (
     LoginView as AllAuthLoginView,
     SignupView as AllAuthSignupView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.response import TemplateResponse
+from django.views.generic import RedirectView
 from django_htmx.http import HttpResponseClientRedirect
 
 from .forms import HasAccountForm
@@ -20,10 +19,9 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
         url = self.get_redirect_url(*args, **kwargs)
         if request.htmx:
             return HttpResponseClientRedirect(url)
-        else:
-            return super().get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
-    def get_redirect_url(self):
+    def get_redirect_url(self, *args, **kwargs):
         return "/"
 
 

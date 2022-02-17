@@ -1,3 +1,4 @@
+# pylint: skip-file
 from .base import *  # noqa
 from .base import env
 
@@ -38,7 +39,7 @@ MIDDLEWARE.remove("django_htmx.middleware.HtmxMiddleware")
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#middleware
 MIDDLEWARE = [
     "django_htmx.middleware.HtmxMiddleware",
-    "sampleapp.util.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ] + MIDDLEWARE  # noqa F405
 # https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html#debug-toolbar-config
 

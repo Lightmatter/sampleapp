@@ -1,9 +1,8 @@
-from django import forms
-
 from allauth.account.forms import (
     LoginForm as AllAuthLoginForm,
     SignupForm as AllAuthSignupForm,
 )
+from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from .models import User

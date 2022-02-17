@@ -1,8 +1,8 @@
-# Django settings for project project.
-from django.core.exceptions import ImproperlyConfigured
-
+# pylint: skip-file
 import pathlib
 from datetime import timedelta
+
+from django.core.exceptions import ImproperlyConfigured
 from environ import Env, Path
 
 root = Path(__file__) - 3
