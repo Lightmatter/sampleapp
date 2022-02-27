@@ -18,7 +18,10 @@ class FileUrlTest(TestCase):
         timestamp = int(time.time())
         actual = file_url_obj("trash", "some_filename")
         now = datetime.datetime.now()
-        expected = f"uploads/foo/{now.year:04}/{now.month:02}/{now.day:02}/{timestamp}/some_filename"
+        expected = (
+            f"uploads/foo/{now.year:04}/{now.month:02}/"
+            f"{now.day:02}/{timestamp}/some_filename"
+        )
         self.assertEqual(actual, expected)
 
     def test_file_upload(self):
@@ -30,8 +33,8 @@ class FileUrlTest(TestCase):
         x = TestFileModel.objects.create(file_field=fake_file)
         actual = x.file_field.url
         expected = (
-            settings.MEDIA_URL
-            + f"uploads/filez/{now.year:04}/{now.month:02}/{now.day:02}/{timestamp}/some_file.txt"
+            f"{settings.MEDIA_URL}uploads/filez/{now.year:04}/{now.month:02}/"
+            f"{now.day:02}/{timestamp}/some_file.txt"
         )
         self.assertEqual(actual, expected)
 
