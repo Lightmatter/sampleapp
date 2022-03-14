@@ -18,6 +18,11 @@ body {
 
 html {
   -webkit-tap-highlight-color: transparent;
+  margin-left: calc(100vw - 100%); /* prevent jump with scroll bar */
+}
+
+header {
+  margin-left: calc(-1 * (100vw - 100%)); /* prevent jump with scroll bar */
 }
 
 [x-cloak] { display: none !important; }
