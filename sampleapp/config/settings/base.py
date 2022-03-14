@@ -217,8 +217,7 @@ TEMPLATES = [
 COMPONENTS = {
     "template_cache_size": 256,
     "libraries": [
-        "sampleapp.util.forms",
-        "sampleapp.util.buttons",
+        "sampleapp.util.components",
     ],
 }
 
