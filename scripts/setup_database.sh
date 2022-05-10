@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #TODO: This doesn't handle test databases correctly
-RESULT=`psql -l | grep "sampleapp" | wc -l | awk '{print $1}'`;
+RESULT=`psql -l | grep "sampleapp" | wc -l | awk '{print $1}' | -p 5433`;
 if test $RESULT -eq 0; then
     echo "Creating Database";
     psql -c "create role sampleapp with createdb encrypted password 'sampleapp' login;"
