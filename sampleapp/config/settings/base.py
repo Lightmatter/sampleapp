@@ -191,6 +191,15 @@ CONTEXT_PROCESSORS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "DIRS": [root("jinja2")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "autoescape": True,
+            "environment": "sampleapp.config.jinja2.environment",
+        },
+    },
+    {
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
@@ -210,7 +219,7 @@ TEMPLATES = [
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": CONTEXT_PROCESSORS,
         },
-    }
+    },
 ]
 
 # components settings
