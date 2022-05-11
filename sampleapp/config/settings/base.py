@@ -193,7 +193,6 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.jinja2.Jinja2",
         "DIRS": [root("jinja2")],
-        "APP_DIRS": True,
         "OPTIONS": {
             "autoescape": True,
             "environment": "sampleapp.config.jinja2.environment",
