@@ -1,25 +1,32 @@
-# https://docs.djangoproject.com/en/4.0/topics/templates/#django.template.backends.jinja2.Jinja2
+"""
+Example options from the docs
+options = {
+    "tests": {
+        "mytest": "path.to.tests.mytestfn",
+    },
+    "filters": {
+        "myfilter": "path.to.filters.myfilterfn",
+    },
+    "constants": {
+        "hello": "hello world",
+    },
+    "globals": {
+        "somefn": "path.to.functions.somefn",
+    },
+}
+"""
+import datetime
 
-from django.templatetags.static import static
-from django.urls import reverse
-from django_vite.templatetags.django_vite import vite_asset, vite_hmr_client
-from jinja2 import Environment
-
-from sampleapp.config.settings.base import CSRF_COOKIE_NAME
-
-
-def environment(**options):
-    options.pop(
-        "string_if_invalid", None
-    )  # https://github.com/pytest-dev/pytest-django/issues/327
-    env = Environment(**options)  # noqa
-    env.globals.update(
-        {
-            "static": static,
-            "url": reverse,
-            "csrf_cookie_name": CSRF_COOKIE_NAME,
-            "vite_asset": vite_asset,
-            "vite_hmr_client": vite_hmr_client,
-        }
-    )
-    return env
+options = {
+    "constants": {"csrf_cookie_name": "sampleapp"},
+    "filters": {
+        "template_localtime": "django.utils.timezone.template_localtime",
+    },
+    "globals": {
+        "vite_asset": "django_vite.templatetags.django_vite.vite_asset",
+        "vite_hmr_client": "django_vite.templatetags.django_vite.vite_hmr_client",
+        "django_htmx_script": "django_htmx.templatetags.django_htmx.django_htmx_script",
+        "now": datetime.datetime.utcnow,
+        "template_localtime": "django.utils.timezone.template_localtime",
+    },
+}

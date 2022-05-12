@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "base.jinja" %}
 {% block title %}
     Jinja
 {% endblock title %}
 {% block content %}
     <h1>Jinja</h1>
-    {% set testing = 'it worked' %}
+    {% set testing = 'Jinja is working' %}
     <h2>{{ testing }}</h2>
     <h3>Cookie Name: {{ csrf_cookie_name }}</h3>
 {% endblock content %}

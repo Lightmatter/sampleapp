@@ -6,6 +6,7 @@ module.exports = {
     './frontend/**/*.js',
     './frontend/**/*.css',
     './sampleapp/templates/**/*.html',
+    './sampleapp/templates/**/*.jinja',
   ],
   theme: {
     extend: {},
