@@ -1,9 +1,9 @@
-{% component_block "account_box" %}
-{% slot title %}
+{% from 'account/components/account_box.jinja' import account_box %}
+{% set title %}
 Welcome back, {{ user.first_name }}!
-{% endslot title %}
-{% slot content %}
-<form hx-post="{{ url('account_login') }}"
+{% endset %}
+{% set content %}
+<form hx-post="{{ url('account_login') }"
       hx-swap="outerHTML"
       hx-target="#account-box"
       class="flex flex-col space-y-10 mb-10">
@@ -63,5 +63,5 @@ Welcome back, {{ user.first_name }}!
         </div>
     </div>
 </div>
-{% endslot content %}
-{% endcomponent_block %}
+{% endset %}
+{{ account_box(title, content) }}

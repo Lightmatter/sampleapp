@@ -1,8 +1,8 @@
-{% component_block "account_box" %}
-{% slot title %}
+{% from 'account/components/account_box.jinja' import account_box %}
+{% set title %}
 Sign up
-{% endslot title %}
-{% slot content %}
+{% endset %}
+{% set content %}
 <form hx-post="{{ url('account_signup') }}"
       hx-target="#account-box"
       hx-swap="outerHTML"
@@ -63,5 +63,5 @@ Sign up
         </div>
     </div>
 </div>
-{% endslot content %}
-{% endcomponent_block %}
+{% endset %}
+{{ account_box(title, content) }}
