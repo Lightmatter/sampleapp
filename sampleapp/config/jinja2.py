@@ -12,9 +12,7 @@ def environment(**options):
     options.pop(
         "string_if_invalid", None
     )  # https://github.com/pytest-dev/pytest-django/issues/327
-    # This actually works, the below is necessary for
-    # flakeheaven env = Environment(**options)
-    env = Environment(**options, autoescape=True)
+    env = Environment(**options)  # noqa
     env.globals.update(
         {
             "static": static,

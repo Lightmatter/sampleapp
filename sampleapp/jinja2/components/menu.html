@@ -1,5 +1,18 @@
-{% from 'button.html' import button %}
-{% macro menu(button) %}
+{% from 'components/button.html' import button %}
+{% set default_button %}
+{{ button()}}
+{% endset %}
+{% set default_content %}
+<div class=""
+     role="menu"
+     aria-orientation="vertical"
+     aria-labelledby="user-menu-button"
+     tabindex="-1"></div>
+{% endset %}
+{% macro menu(button=default_button, content=default_content, button_style='text-gray-500 group bg-white rounded-md
+    inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2
+    focus:ring-indigo-500', menu_style='absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs
+    sm:px-0') %}
     <div x-data="dropdown"
          x-on:keydown.escape.prevent.stop="close($refs.button)"
          x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
@@ -12,10 +25,10 @@
                 :aria-controls="$id('dropdown-button')"
                 type="button"
                 :class="open ? 'text-gray-900' : 'text-gray-500'"
-                class="{{ button_style|default:'text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' }}">
-            {% slot "button" %}{% endslot %}
+                class="{{ button_style }}">
+            {{ button }}
         </button>
-        <div class="{{ menu_style|default:'absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0' }}"
+        <div class="{{ menu_style }}"
              x-ref="panel"
              x-show="open"
              x-on:click.outside="close($refs.button)"
@@ -28,7 +41,7 @@
              x-transition:leave-start="opacity-100 translate-y-0"
              x-transition:leave-end="opacity-0 translate-y-1">
             <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">{% slot "content" %}{% endslot %}</div>
+                <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">{{ content }}</div>
             </div>
         </div>
     </div>
