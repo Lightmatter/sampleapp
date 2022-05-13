@@ -4,10 +4,7 @@
 {% set default_content %}
     <h2>I thought not. It's not a story the Jedi would tell you.</h2>
 {% endset %}
-{% macro account_box(title=default_title, content=default_content) %}
-<div class="mt-20 sm:mx-auto sm:w-full sm:max-w-md" id="account-box">
-    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col justify-center relative">
-        {% slot "back" %}
+{% set default_back %}
         <a class="absolute top-6 left-6"
            hx-get="{{ url('user:account_welcome') }}"
            hx-select="#account-box"
@@ -24,13 +21,17 @@
                       d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
             </svg>
         </a>
-    {% endslot %}
+{% endset %}
+{% macro account_box(title=default_title, content=default_content, back=default_back ) %}
+<div class="mt-20 sm:mx-auto sm:w-full sm:max-w-md" id="account-box">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col justify-center relative">
+        {{ back }}
+    </div>
     <img class="mx-auto h-12 w-auto"
-         src="{% static "img/logo.svg" %}"
+         src="{{ static("img/logo.svg") }}"
          alt="logo">
     <h2 class="mt-2 mb-4 text-center text-xl font-bold text-gray-900"
-        slot="title">{{ default_title }}</h2>
+        slot="title">{{ title }}</h2>
     {{ content }}
-</div>
 </div>
 {% endmacro %}

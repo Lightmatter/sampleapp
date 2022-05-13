@@ -1,10 +1,8 @@
-{% macro welcome_box() %}
-{% component_block "account_box" %}
-{% slot title %}
+{% from 'account/components/account_box.jinja' import account_box %}
+{% set welcome_title %}
 Log in/Sign up
-{% endslot title %}
-{% slot back %} {% endslot back %}
-{% slot content %}
+{% endset %}
+{% set welcome_content %}
 <form hx-get="{{ url('user:account_welcome') }}"
       hx-swap="outerHTML"
       hx-target="#account-box"
@@ -64,6 +62,7 @@ Log in/Sign up
         </div>
     </div>
 </div>
-{% endslot content %}
-{% endcomponent_block %}
+{% endset %}
+{% macro welcome_box(title=welcome_title, content=welcome_content) %}
+    {{ account_box(title, content) }}
 {% endmacro %}

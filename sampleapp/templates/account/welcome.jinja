@@ -1,3 +1,5 @@
+{% from "account/components/welcome_box.jinja" import welcome_box %}
+
 {% extends "base.jinja" %}
 {% block head_title %}
     {% trans %}
@@ -5,5 +7,5 @@
 {% endtrans %}
 {% endblock head_title %}
 {% block content %}
-    <div class="container mx-auto">{% component "welcome_box" %}</div>
+    <div class="container mx-auto">{{ welcome_box() }}</div>
 {% endblock content %}
