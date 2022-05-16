@@ -1,10 +1,12 @@
+
+{% from 'django/forms/inputgroup.jinja' import inputgroup %}
 <div class="form-wrapper gap-x-6 justify-between">
     {{ errors }}
     {% for field, errors in fields %}
         {% if field.name == 'first_name' or field.name == 'last_name' %}
-            {% include "django/forms/inputgroup.jinja" with field=field errors=errors layout_classes="w-5/12" %}
+            {{ inputgroup(field, errors, 'w-5/12') }}
         {% else %}
-            {% include "django/forms/inputgroup.jinja" with field=field errors=errors %}
+            {{ inputgroup(field, errors) }}
         {% endif %}
     {% endfor %}
     {% for field in hidden_fields %}{{ field }}{% endfor %}

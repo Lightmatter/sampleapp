@@ -4,18 +4,22 @@
 {% endblock title %}
 {% block content %}
     <div class="container mx-auto">
-        Hello There!
-        <p id="current-time">
-            {% include 'current_time.jinja' %}
-        </p>
-        <button class="w"
-                hx-push-url="false"
-                hx-get="/current-time/"
-                hx-target="#current-time">Refresh time</button>
-        <a href="{{ url('user:redirect') }}">test redirect</a>
-        <template slot="header">
-            <h1>Panel Header</h1>
-        </template>
-        <button type="button" class="bg-white border border-black px-4 py-2">default slot time</button>
-    </div>
+        {% set greeting='Hello There!' %}
+        {% set greeting_styled %}
+        <em>{{ greeting }}</em>
+    {% endset %}
+    <h1>{{ greeting_styled }}</h1>
+    <p id="current-time">
+        {% include 'current_time.jinja' %}
+    </p>
+    <button class="w"
+            hx-push-url="false"
+            hx-get="/current-time/"
+            hx-target="#current-time">Refresh time</button>
+    <a href="{{ url('user:redirect') }}">test redirect</a>
+    <template slot="header">
+        <h1>Panel Header</h1>
+    </template>
+    <button type="button" class="bg-white border border-black px-4 py-2">default slot time</button>
+</div>
 {% endblock content %}

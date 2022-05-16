@@ -69,7 +69,7 @@ def welcome(request):
 
     form = HasAccountForm(request.GET)
     if not form.is_valid():
-        return TemplateResponse(request, "account/welcome.jinja", {"form": form})
+        return TemplateResponse(request, "account/welcome.jinja", {"form": form()})
 
     try:
         email = form.cleaned_data.get("email")

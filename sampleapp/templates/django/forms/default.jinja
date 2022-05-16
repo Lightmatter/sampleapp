@@ -1,7 +1,8 @@
-<div class="form-wrapper">
-    {{ errors }}
-    {% for field, errors in fields %}
-        {% include "django/forms/inputgroup.jinja" with field=field errors=errors %}
-    {% endfor %}
-    {% for field in hidden_fields %}{{ field }}{% endfor %}
-</div>
+{% from 'django/forms/inputgroup.jinja' import inputgroup %}
+{% macro default(field, errors) %}
+    <div class="form-wrapper">
+        {{ errors }}
+        {% for field, errors in fields %}{{ inputgroup(field, errors )}}{% endfor %}
+        {% for field in hidden_fields %}{{ field }}{% endfor %}
+    </div>
+{% endmacro %}

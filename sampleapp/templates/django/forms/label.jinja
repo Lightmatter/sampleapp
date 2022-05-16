@@ -1,7 +1,9 @@
+{% macro label(field, tag='label') %}
 {% if use_tag %}
-    <{{ tag|default:'label' }}
+    <{{ tag }}
     {% include 'django/forms/attrs.jinja' %}
-    class="block text-sm font-medium text-gray-700">{{ field.label }}</{{ tag|default:"label" }}>
+    class="block text-sm font-medium text-gray-700">{{ field.label }}</{{ tag }}>
 {% else %}
     {{ field.label }}
 {% endif %}
+{% endmacro %}
