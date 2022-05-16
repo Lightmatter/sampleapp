@@ -3,8 +3,7 @@
 {{ button()}}
 {% endset %}
 {% set default_content %}
-<div class=""
-     role="menu"
+<div role="menu"
      aria-orientation="vertical"
      aria-labelledby="user-menu-button"
      tabindex="-1"></div>
@@ -19,7 +18,7 @@
          x-id="['dropdown-button']"
          class="relative">
         <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-        <button x-ref="button"
+        <a x-ref="button"
                 @click="toggle()"
                 :aria-expanded="open"
                 :aria-controls="$id('dropdown-button')"
@@ -27,7 +26,7 @@
                 :class="open ? 'text-gray-900' : 'text-gray-500'"
                 class="{{ button_style }}">
             {{ button }}
-        </button>
+        </a>
         <div class="{{ menu_style }}"
              x-ref="panel"
              x-show="open"

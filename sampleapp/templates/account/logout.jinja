@@ -1,19 +1,27 @@
 {% extends "base.jinja" %}
 {% block head_title %}
-    {% trans "Sign Out" %}
+    {% trans %}
+    Sign Out
+{% endtrans %}
 {% endblock head_title %}
 {% block content %}
-    <h1>{% trans "Sign Out" %}</h1>
+    {% trans %}
+    <h1>Sign Out</h1>
     <p>
-        {% trans 'Are you sure you want to sign out?' %}
+        Are you sure you want to sign out?
     </p>
-    <form method="post" action="{{ url('account_logout') }}">
-        {% csrf_token %}
-        {% if redirect_field_value %}
-            <input type="hidden"
-                   name="{{ redirect_field_name }}"
-                   value="{{ redirect_field_value }}"/>
-        {% endif %}
-        <button type="submit">{% trans 'Sign Out' %}</button>
-    </form>
+{% endtrans %}
+<form method="post" action="{{ url('account_logout') }}">
+    {% csrf_token %}
+    {% if redirect_field_value %}
+        <input type="hidden"
+               name="{{ redirect_field_name }}"
+               value="{{ redirect_field_value }}"/>
+    {% endif %}
+    <button type="submit">
+        {% trans %}
+        Sign Out
+    {% endtrans %}
+</button>
+</form>
 {% endblock content %}

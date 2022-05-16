@@ -1,5 +1,5 @@
 {% from 'account/components/account_box.jinja' import account_box %}
-{% import 'svg/svg.jinja' as svg %}{% extends "base.jinja" %}
+{% import 'svg/svg.jinja' as svg %}
 {% set title="Sign up" %}
 {% set content %}
 <form hx-post="{{ url('account_signup') }}"
@@ -44,4 +44,6 @@
     </div>
 </div>
 {% endset %}
-{{ account_box(title, content) }}
+{% block content %}
+    {{ account_box(title, content) }}
+{% endblock content %}
