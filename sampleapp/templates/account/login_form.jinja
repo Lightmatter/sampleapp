@@ -10,6 +10,6 @@
             {{ inputgroup(field, errors) }}
         {% endif %}
     {% endfor %}
-    <a href="{{ url("account_reset_password") }}" class="link">Forgot your password?</a>
+    <a href="{{ url("account_reset_password") }}" hx-select='#account-box' class="link">Forgot your password?</a>
     {% for field in hidden_fields %}{{ field }}{% endfor %}
 </div>
