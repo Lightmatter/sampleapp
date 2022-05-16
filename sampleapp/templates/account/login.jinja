@@ -4,7 +4,7 @@
 Welcome back, {{ user.first_name }}!
 {% endset %}
 {% set content %}
-<form hx-post="{{ url('account_login') }"
+<form hx-post="{{ url('account_login') }}"
       hx-swap="outerHTML"
       hx-target="#account-box"
       class="flex flex-col space-y-10 mb-10">
