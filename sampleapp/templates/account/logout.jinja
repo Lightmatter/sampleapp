@@ -1,3 +1,6 @@
+{% from 'account/components/account_box.jinja' import account_box %}
+{% from 'django/forms/inputgroup.jinja' import inputgroup %}
+{% from 'components/button.jinja' import button %}
 {% extends "base.jinja" %}
 {% block head_title %}
     {% trans %}
@@ -5,8 +8,9 @@
 {% endtrans %}
 {% endblock head_title %}
 {% block content %}
+    {% set title="Sign Out" %}
+    {% set content %}
     {% trans %}
-    <h1>Sign Out</h1>
     <p>
         Are you sure you want to sign out?
     </p>
@@ -18,10 +22,8 @@
                name="{{ redirect_field_name }}"
                value="{{ redirect_field_value }}"/>
     {% endif %}
-    <button type="submit">
-        {% trans %}
-        Sign Out
-    {% endtrans %}
-</button>
+    {{ button("Sign Out", 'submit') }}
 </form>
+{% endset %}
+{{ account_box(title, content, back='') }}
 {% endblock content %}
