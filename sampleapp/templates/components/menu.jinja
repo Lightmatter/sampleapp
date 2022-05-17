@@ -19,12 +19,12 @@
          class="relative">
         <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
         <a x-ref="button"
-                @click="toggle()"
-                :aria-expanded="open"
-                :aria-controls="$id('dropdown-button')"
-                type="button"
-                :class="open ? 'text-gray-900' : 'text-gray-500'"
-                class="{{ button_style }}">
+           @click="toggle()"
+           :aria-expanded="open"
+           :aria-controls="$id('dropdown-button')"
+           type="button"
+           :class="open ? 'text-gray-900' : 'text-gray-500'"
+           class="{{ button_style }}">
             {{ button }}
         </a>
         <div class="{{ menu_style }}"
