@@ -43,7 +43,6 @@ repos:
         entry: poetry run djlint --reformat
         language: system
         types_or: [html,jinja]
-        custom_blocks: [trans]
 
 ## system
 -   repo: https://github.com/asottile/pyupgrade

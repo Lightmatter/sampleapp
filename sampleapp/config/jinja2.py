@@ -31,7 +31,7 @@ def random_chart(
             previous_val = (results[-2][var] + previous_mean) / 2
             results[-1].append(
                 random.randrange(  # noqa
-                    floor(0.67 * previous_val), ceil(1.5 * previous_val)  # noqa
+                    floor(0.5 * previous_val), ceil(2 * previous_val)  # noqa
                 )  # noqa
             )
     return results

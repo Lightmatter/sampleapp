@@ -8,9 +8,11 @@
 <!-- Chart line -->
 <script>
   { // the reason this is in a module is so there are no variable redeclaration errors
+    function rn(min, max) { 
+      return Math.floor(Math.random() * (max - min) + min);
+    } // random number between min and max
     let labels = [];
     let datasets = [];
-    let randomColor1, randomColor2;
     const data = {
       labels: labels,
       datasets: datasets,
@@ -18,7 +20,7 @@
     const configLineChart = {
       type: "line",
       data,
-      options: {},
+      options: {}
     };
     var chartLine = new Chart(
       document.getElementById("chartLine"),
@@ -26,14 +28,13 @@
     );
     {% set rc = random_chart() %}
     {% for i in range(rc[1]|length)%}
-      randomColor1 = "#" + ((1<<24)*Math.random() | 0).toString(16);
-      randomColor2 = "#" + ((1<<24)*Math.random() | 0).toString(16);
       datasets.push(
         {
           label: "Dataset {{ i }}",
-          backgroundColor: randomColor1,
-          borderColor: randomColor2,
+          backgroundColor : `rgba(${rn(0,255)},${rn(0,255)},${rn(0,255)},0.5)`,
+          borderColor : `rgba(${rn(0,255)},${rn(0,255)},${rn(0,255)},1)`,
           data: [],
+          fill: {{ i }} + 1,
         },
       );
     {% endfor %}
