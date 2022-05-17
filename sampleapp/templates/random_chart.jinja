@@ -8,10 +8,9 @@
 <!-- Chart line -->
 <script>
   { // the reason this is in a module is so there are no variable redeclaration errors
-    let labels = []
-    let datasets = []
-    let randomColor1
-    let randomColor2
+    let labels = [];
+    let datasets = [];
+    let randomColor1, randomColor2;
     const data = {
       labels: labels,
       datasets: datasets,
@@ -27,8 +26,8 @@
     );
     {% set rc = random_chart() %}
     {% for i in range(rc[1]|length)%}
-      randomColor1 = "#" + ((1<<24)*Math.random() | 0).toString(16)
-      randomColor2 = "#" + ((1<<24)*Math.random() | 0).toString(16)
+      randomColor1 = "#" + ((1<<24)*Math.random() | 0).toString(16);
+      randomColor2 = "#" + ((1<<24)*Math.random() | 0).toString(16);
       datasets.push(
         {
           label: "Dataset {{ i }}",
@@ -36,15 +35,14 @@
           borderColor: randomColor2,
           data: [],
         },
-      )
+      );
     {% endfor %}
     {% for data in rc %}
       setTimeout(function(){
         labels.push({{ loop.index0 }} + 1)
         {% for j in data %}            datasets[{{ loop.index0 }}].data.push({{ j }}){% endfor %}
-          chartLine.update()
+          chartLine.update();
       }, 750 * {{ loop.index0 }});
     {% endfor %}
-
   }
 </script>
