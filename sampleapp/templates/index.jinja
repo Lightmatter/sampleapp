@@ -6,7 +6,7 @@
     <div class="container mx-auto">
         {% set greeting='Hello There!' %}
         {% set greeting_styled %}
-        <em>{{ greeting }}</em>
+        <em class="text-2xl font-bold ">{{ greeting }}</em>
     {% endset %}
     <h1>{{ greeting_styled }}</h1>
     <div id="current-time">
@@ -21,6 +21,19 @@
             hx-swap='innerHTML'
             >
         Refresh time
+    </button>
+    <div id="random-chart">
+        {% include 'random_chart.jinja' %}
+    </div>
+    <button type="button"
+            class="bg-white border border-black px-4 py-2"
+            class="w"
+            hx-push-url="false"
+            hx-get="/random-chart/"
+            hx-target="#random-chart"
+            hx-swap='innerHTML'
+            >
+        Refresh Chart
     </button>
     <template slot="header">
         <h1>Panel Header</h1>
