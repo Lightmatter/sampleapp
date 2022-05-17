@@ -40,7 +40,7 @@
     {% for data in rc %}
       setTimeout(function(){
         labels.push({{ loop.index0 }} + 1)
-        {% for j in data %}            datasets[{{ loop.index0 }}].data.push({{ j }}){% endfor %}
+        {% for j in data %}          datasets[{{ loop.index0 }}].data.push({{ j }});{% endfor %}
           chartLine.update();
       }, 750 * {{ loop.index0 }});
     {% endfor %}
