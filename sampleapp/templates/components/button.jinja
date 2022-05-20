@@ -3,9 +3,27 @@
     {# Color support: primary, secondary, success, danger, warning, info, light, dark #}
     {# Shape support: rounded, square, circle #}
     {# Size support: xs, sm, md, lg, xl #}
-    {% set class="inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %}
-    {% if variant == 'outline' %}
+    {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"600" %}
+    {% if variant == 'normal' %}
         {% set class = class + " border border-transparent" %}
+    {% elif variant == 'outline' %}
+        {% set class = class + "border border-" + color + '-700' %}
+    {% endif %}
+    {% if size == 'xs' %}
+        {% set class = class + " px-2.5 py-1.5 text-xs" %}
+    {% elif size == 'sm' %}
+        {% set class = class + " px-3 py-2 text-sm" %}
+    {% elif size == 'md' %}
+        {% set class = class + " px-4 py-2 text-sm" %}
+    {% elif size == 'lg' %}
+        {% set class = class + " px-4 py-2 text-base" %}
+    {% elif size == 'xl' %}
+        {% set class = class + " px-6 py-3 text-base" %}
+    {% endif %}
+    {% if shape == 'rounded' %}
+        {% set class = class + " rounded" %}
+    {% elif shape == 'circle' %}
+        {% set class = class + 'rounded-full' %}
     {% endif %}
     {% set class = class + " text-white bg-" + color + '-500' + "hover:bg-" + color + '-600' %}
     <button type="{{ type }}"
