@@ -3,7 +3,7 @@
     {# Color support: primary, secondary, success, danger, warning, info, light, dark #}
     {# Shape support: rounded, square, circle #}
     {# Size support: xs, sm, md, lg, xl #}
-    {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"600" %}
+    {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"-600" %}
     {% if variant == 'normal' %}
         {% set class = class + " border border-transparent" %}
     {% elif variant == 'outline' %}
@@ -25,11 +25,10 @@
     {% elif shape == 'circle' %}
         {% set class = class + 'rounded-full' %}
     {% endif %}
-    {% set class = class + " text-white bg-" + color + '-500' + "hover:bg-" + color + '-600' %}
+    {% set class = class + " text-white bg-" + color + '-500 hover:bg-' + color + '-600' %}
     <button type="{{ type }}"
             x-on:click="$dispatch('{{ dispatch_name }}')"
-            class="{{ class }}"
-            class="px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            class="{{ class }}">
         {{ button_content }}
     </button>
 {% endmacro %}

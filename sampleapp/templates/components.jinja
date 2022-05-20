@@ -1,0 +1,8 @@
+{% extends "base.jinja" %}
+{% from 'components/button.jinja' import button %}
+{% block title %}
+    Components
+{% endblock title %}
+{% block content %}
+    <div class="container p-2">{{ button() }}</div>
+{% endblock content %}
