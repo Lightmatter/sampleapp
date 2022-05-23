@@ -4,5 +4,16 @@
     Components
 {% endblock title %}
 {% block content %}
-    <div class="container p-2">{{ button() }}</div>
+    <div class="container p-2">
+        <h1 class="text-bold text-3xl">Components</h1>
+        <div>
+            <h2 class="text-semibold text-xl">Buttons</h2>
+            {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
+            {{ button('secondary normal rounded', color='secondary', variant='normal', shape='rounded') }}
+            {{ button('accent normal rounded', color='accent', variant='normal', shape='rounded') }}
+            {{ button('primary outline rounded', color='primary', variant='outline', shape='rounded') }}
+            {{ button('secondary outline rounded', color='secondary', variant='outline', shape='rounded') }}
+            {{ button('accent outline rounded', color='accent', variant='outline', shape='rounded') }}
+        </div>
+    </div>
 {% endblock content %}

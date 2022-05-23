@@ -1,6 +1,6 @@
-{% macro button(button_content='Button', dispatch_name='click', variant='normal', color= 'primary', shape='rounded', size='md', type='button') %}
+{% macro button(button_content='Button', dispatch_name='click', variant='normal', color='neutral', shape='rounded', size='md', type='button') %}
     {# Variant support: normal, outline #}
-    {# Color support: primary, secondary, success, danger, warning, info, light, dark #}
+    {# Color support: primary, secondary, accent #}
     {# Shape support: rounded, square, circle #}
     {# Size support: xs, sm, md, lg, xl #}
     {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"-600" %}
@@ -32,3 +32,9 @@
         {{ button_content }}
     </button>
 {% endmacro %}
+{#
+text-neutral-content bg-neutral-500 hover:bg-neutral-600 border-neutral-700 focus:ring-neutral-600
+text-primary-content bg-primary-500 hover:bg-primary-600 border-primary-700 focus:ring-primary-600
+text-secondary-content bg-secondary-500 hover:bg-secondary-600 border-secondary-700 focus:ring-secondary-600
+text-accent-content bg-accent-500 hover:bg-accent-600 border-accent-700 focus:ring-accent-600
+#}
