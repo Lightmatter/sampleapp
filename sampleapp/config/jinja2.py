@@ -1,23 +1,8 @@
-"""
-Example options from the docs
-options = {
-    "tests": {
-        "mytest": "path.to.tests.mytestfn",
-    },
-    "filters": {
-        "myfilter": "path.to.filters.myfilterfn",
-    },
-    "constants": {
-        "hello": "hello world",
-    },
-    "globals": {
-        "somefn": "path.to.functions.somefn",
-    },
-}
-"""
 import datetime
 import random
 from math import ceil, floor
+
+from django.conf import settings
 
 
 def random_chart(
@@ -38,7 +23,7 @@ def random_chart(
 
 
 options = {
-    "constants": {"csrf_cookie_name": "sampleapp"},
+    "constants": {"csrftoken": settings.CSRF_COOKIE_NAME},
     "filters": {
         "template_localtime": "django.utils.timezone.template_localtime",
     },
