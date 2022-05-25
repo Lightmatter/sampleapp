@@ -1,13 +1,13 @@
-{% macro button(button_content='Button', dispatch_name='click', variant='normal', color='neutral', shape='rounded', size='md', type='button') %}
+{% macro button(button_content='Button', dispatch_name='button-click', variant='normal', color='primary', shape='rounded', size='md', type='button') %}
     {# Variant support: normal, outline #}
-    {# Color support: primary, secondary, accent #}
+    {# Color support: primary, secondary, accent, success, info, warning, error #}
     {# Shape support: rounded, square, circle #}
     {# Size support: xs, sm, md, lg, xl #}
     {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"-600" %}
     {% if variant == 'normal' %}
         {% set class = class + " border border-transparent" %}
     {% elif variant == 'outline' %}
-        {% set class = class + "border border-" + color + '-700' %}
+        {% set class = "{} border border-{}-focus".format(class, color) %}
     {% endif %}
     {% if size == 'xs' %}
         {% set class = class + " px-2.5 py-1.5 text-xs" %}
@@ -23,18 +23,21 @@
     {% if shape == 'rounded' %}
         {% set class = class + " rounded" %}
     {% elif shape == 'circle' %}
-        {% set class = class + 'rounded-full' %}
+        {% set class = class + ' rounded-full' %}
     {% endif %}
-    {% set class = class + " text-white bg-" + color + '-500 hover:bg-' + color + '-600' %}
+    {% set class = "{} text-{}-content bg-{} hover:bg-{}-focus".format(class, color, color, color) %}
     <button type="{{ type }}"
-            x-on:click="$dispatch('{{ dispatch_name }}')"
+            x-on:click="$dispatch('{{ dispatch_name }}', '{{ button_content }}')"
             class="{{ class }}">
         {{ button_content }}
     </button>
 {% endmacro %}
 {#
-text-neutral-content bg-neutral-500 hover:bg-neutral-600 border-neutral-700 focus:ring-neutral-600
-text-primary-content bg-primary-500 hover:bg-primary-600 border-primary-700 focus:ring-primary-600
-text-secondary-content bg-secondary-500 hover:bg-secondary-600 border-secondary-700 focus:ring-secondary-600
-text-accent-content bg-accent-500 hover:bg-accent-600 border-accent-700 focus:ring-accent-600
+text-primary-content bg-primary hover:bg-primary-focus border-primary-focus
+text-secondary-content bg-secondary hover:bg-secondary-focus border-secondary-focus
+text-accent-content bg-accent hover:bg-accent-focus border-accent-focus
+text-success-content bg-success hover:bg-success-focus border-success-focus
+text-info-content bg-info hover:bg-info-focus border-info-focus
+text-warning-content bg-warning hover:bg-warning-focus border-warning-focus
+text-error-content bg-error hover:bg-error-focus border-error-focus
 #}

@@ -12,45 +12,21 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          '50': '#ebecfa',
-          '100': '#c3c6ef',
-          '200': '#9aa0e4',
-          '300': '#727ad9',
-          '400': '#4a54cf',
-          '500': '#303ab5',
-          '600': '#262d8d',
-          '700': '#1b2065',
-          '800': '#10133c',
-          '900': '#050614',
+          DEFAULT: '#2D36A8',
+          focus: '#040d8c',
+          content: '#ffffff'
         },
         secondary: {
-          '50': '#f1f2f4',
-          '100': '#d4d8dd',
-          '200': '#b7bec7',
-          '300': '#9ba4b1',
-          '400': '#7e899a',
-          '500': '#657081',
-          '600': '#4e5764',
-          '700': '#383e48',
-          '800': '#22252b',
-          '900': '#0b0c0e',
+          DEFAULT: '#D1D5DB',
+          focus: '#e5e8ed',
+          content: '#000000'
         },
         accent: {
-          '50': '#edf0f7',
-          '100': '#cad3e8',
-          '200': '#a6b6d8',
-          '300': '#8399c9',
-          '400': '#5f7cb9',
-          '500': '#4662a0',
-          '600': '#364d7c',
-          '700': '#273759',
-          '800': '#172135',
-          '900': '#080b12',
+          DEFAULT: '#111827',
+          'focus': '#030509',
+          'content': '#ffffff'
         },
-        base: {
-          '100': '#FFFFFF',
-        },
-        gray: {
+        neutral: {
           '100': '#F3F6FA',
           '200': '#E5E7EB',
           '300': '#D1D5DB',
@@ -61,26 +37,26 @@ module.exports = {
           '800': '#1F2937',
           '900': '#111827',
         },
-        blue: {
-          '50': '#eff6ff',
-          400: '#60a5fa',
-          800: '#1e40af',
+        info: {
+          DEFAULT: '#60a5fa',
+          'focus': '#1e40af',
+          'content': '#eff6ff'
         },
-        green: {
-          50: '#f0fdf4',
-          400: '#4ade80',
-          800: '#166534',
+        success: {
+          DEFAULT: '#4ade80',
+          'focus': '#166534',
+          'content':'#f0fdf4',
         },
-        yellow: {
-          50: '#fefce8',
-          400: '#FACC15',
-          800: '#854DOE',
+        warning: {
+          DEFAULT: '#FACC15',
+          'focus': '#854D0E',
+          'content': '#fefce8'
         },
-        red: {
-          50: '#FEF2F2',
-          400: '#F87171',
-          800: '#991b1b',
-        }
+        error: {
+          DEFAULT: '#F87171',
+          'focus': '#991b1b',
+          'content': '#FEF2F2'
+        },
       }
     },
   },
