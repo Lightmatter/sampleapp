@@ -1,5 +1,6 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
+{% from 'components/toggle.jinja' import toggle %}
 {% block title %}
     Components
 {% endblock title %}
@@ -15,7 +16,7 @@
             <h5>Heading 5</h5>
             <h6>Heading 6</h6>
             <p>
-                Paragraph
+                Paragraph, <a href="#" class="link">link with link class</a>
             </p>
         </div>
         <div>
@@ -60,6 +61,11 @@
                     {{ button('primary normal rounded xl', color='primary', size="xl") }}
                 </div>
             </div>
+        </div>
+        <div>
+            <h2>Toggle</h2>
+            {# {{ toggle('primary') }} #}
+            {# {{ toggle('primary', true) }} #}
         </div>
     </div>
 {% endblock content %}
