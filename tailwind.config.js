@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: '#2D36A8',
-          focus: '#040d8c',
+          focus: '#00075e',
           content: '#ffffff'
         },
         secondary: {

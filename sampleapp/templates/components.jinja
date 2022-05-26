@@ -5,16 +5,16 @@
 {% endblock title %}
 {% block content %}
     <div class="container p-2">
-        <h1 class="text-bold text-3xl">Components</h1>
+        <h1>Components</h1>
         <div>
-            <h2 class="text-semibold text-xl">Buttons</h2>
+            <h2 >Buttons</h2>
             <div x-data="{ clicked: 'none' }"
                  @button-click.window="clicked = $event.detail">
-                <h1>
+                <h4>
                     Clicked Button: <span x-text="clicked"></span>
-                </h1>
+                </h4>
                 <div>
-                    <h3 class="text-semibold text-lg">Colors</h3>
+                    <h3>Colors</h3>
                     {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
                     {{ button('secondary normal rounded', color='secondary', variant='normal', shape='rounded') }}
                     {{ button('accent normal rounded', color='accent', variant='normal', shape='rounded') }}
@@ -24,18 +24,23 @@
                     {{ button('error normal rounded', color='error', variant='normal', shape='rounded') }}
                 </div>
                 <div>
-                    <h3 class="text-semibold text-lg">Shapes</h3>
+                    <h3>Shapes</h3>
                     {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
                     {{ button('primary normal square', color='primary', variant='normal', shape='square') }}
                     {{ button('primary normal circle', color='primary', variant='normal', shape='circle') }}
                 </div>
                 <div>
-                    <h3 class="text-semibold text-lg">Outlines</h3>
-                    {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
+                    <h3>Outlines</h3>
                     {{ button('primary outline rounded', color='primary', variant='outline', shape='rounded') }}
+                    {{ button('secondary outline rounded', color='secondary', variant='outline', shape='rounded') }}
+                    {{ button('accent outline rounded', color='accent', variant='outline', shape='rounded') }}
+                    {{ button('success outline rounded', color='success', variant='outline', shape='rounded') }}
+                    {{ button('info outline rounded', color='info', variant='outline', shape='rounded') }}
+                    {{ button('warning outline rounded', color='warning', variant='outline', shape='rounded') }}
+                    {{ button('error outline rounded', color='error', variant='outline', shape='rounded') }}
                 </div>
                 <div>
-                    <h3 class="text-semibold text-lg">Sizes</h3>
+                    <h3>Sizes</h3>
                     {{ button('primary normal rounded xs', color='primary', size="xs") }}
                     {{ button('primary normal rounded sm', color='primary', size="sm") }}
                     {{ button('primary normal rounded md', color='primary', size="md") }}
