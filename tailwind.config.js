@@ -11,24 +11,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: { 
-          '50': '#ebecfa',
-          '100':'#c3c6ef',
-          '200':'#9aa0e4',
-          '300':'#727ad9',
-          '400':'#4a54cf',
-          '500':'#303ab5',
-          '600':'#262d8d',
-          '700':'#1b2065',
-          '800':'#10133c',
-          '900':'#050614',
-         },
-        'secondary': '#D1D5DB',
-        'accent': '#111827',
-        base: {
-          '100': '#FFFFFF',
+        primary: {
+          DEFAULT: '#2D36A8',
+          focus: '#00075e',
+          content: '#ffffff'
         },
-        gray: {
+        secondary: {
+          DEFAULT: '#D1D5DB',
+          focus: '#e5e8ed',
+          content: '#000000'
+        },
+        accent: {
+          DEFAULT: '#111827',
+          'focus': '#030509',
+          'content': '#ffffff'
+        },
+        neutral: {
           '100': '#F3F6FA',
           '200': '#E5E7EB',
           '300': '#D1D5DB',
@@ -39,26 +37,26 @@ module.exports = {
           '800': '#1F2937',
           '900': '#111827',
         },
-        blue: {
-          '50': '#eff6ff',
-          400: '#60a5fa',
-          800: '#1e40af',
+        info: {
+          DEFAULT: '#60a5fa',
+          'focus': '#1e40af',
+          'content': '#eff6ff'
         },
-        green: {
-          50: '#f0fdf4',
-          400: '#4ade80',
-          800: '#166534',
+        success: {
+          DEFAULT: '#4ade80',
+          'focus': '#166534',
+          'content':'#f0fdf4',
         },
-        yellow: {
-          50: '#fefce8',
-          400: '#FACC15',
-          800: '#854DOE',
+        warning: {
+          DEFAULT: '#FACC15',
+          'focus': '#854D0E',
+          'content': '#fefce8'
         },
-        red: {
-          50: '#FEF2F2',
-          400: '#F87171',
-          800: '#991b1b',
-        }
+        error: {
+          DEFAULT: '#F87171',
+          'focus': '#991b1b',
+          'content': '#FEF2F2'
+        },
       }
     },
   },

@@ -10,6 +10,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="random_chart.jinja"),
         name="random_chart",
     ),
+    path(
+        "components/",
+        TemplateView.as_view(template_name="components.jinja"),
+        name="components",
+    ),
     path(r"error/", error, name="error"),
     path(r"", TemplateView.as_view(template_name="index.jinja"), name="home"),
 ]
