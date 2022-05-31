@@ -4,7 +4,7 @@
             role="switch"
             aria-checked="{{ start }}"
             x-model="{{ model }}"
-            x-data="on: {{ start }}"
+            x-data="on: '{{ start }}'"
             x-on:click="on = !on"
             x-state:on="Enabled"
             x-state:off="Not Enabled"
