@@ -37,6 +37,12 @@ def random_chart(
     return results
 
 
+def convert_tf(item1: str | bool) -> bool:
+    if item1:
+        return "true"
+    return ""
+
+
 options = {
     "constants": {"csrf_cookie_name": "sampleapp"},
     "filters": {
@@ -49,5 +55,6 @@ options = {
         "now": datetime.datetime.utcnow,
         "template_localtime": "django.utils.timezone.template_localtime",
         "random_chart": random_chart,
+        "convert_tf": convert_tf,
     },
 }

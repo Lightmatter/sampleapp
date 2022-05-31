@@ -26,7 +26,7 @@
         {% set class = "{} text-{}-content bg-{} hover:bg-{}-focus".format(class, color, color, color) %}
     {% endif %}
     <button type="{{ type }}"
-            x-on:click="$dispatch('{{ dispatch_name }}', '{{ button_content }}')"
+            x-on:click="$dispatch('{{ dispatch_name }}', '{{ variant }} {{ color }} {{ shape }} {{ size }}')"
             class="{{ class }}">
         {{ button_content }}
     </button>

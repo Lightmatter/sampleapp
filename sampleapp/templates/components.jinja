@@ -1,6 +1,6 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
-{% from 'components/toggle.jinja' import toggle %}
+{% from 'components/toggle.jinja' import toggle, toggle_label %}
 {% block title %}
     Components
 {% endblock title %}
@@ -64,8 +64,19 @@
         </div>
         <div>
             <h2>Toggle</h2>
-            {{ toggle('primary') }}
-            {{ toggle('primary', true) }}
+            {{ toggle(color='primary', size="normal", icon=False) }}
+            {{ toggle(color='primary', size="normal", icon=True) }}
+            {{ toggle(color='primary', size="sm", icon=False) }}
+            {{ toggle(color='primary', size="sm", icon=True) }}
+            {{ toggle_label(side='left') }}
+            {{ toggle_label(side='right') }}
+            {{ toggle(color='primary', size="normal", icon=True) }}
+            {{ toggle(color='secondary', size="normal", icon=True) }}
+            {{ toggle(color='accent', size="normal", icon=True) }}
+            {{ toggle(color='success', size="normal", icon=True) }}
+            {{ toggle(color='info', size="normal", icon=True) }}
+            {{ toggle(color='warning', size="normal", icon=True) }}
+            {{ toggle(color='error', size="normal", icon=True) }}
         </div>
     </div>
 {% endblock content %}
