@@ -1,6 +1,6 @@
-{% macro twitter() %}
-    <object>
-        <svg class="w-5 h-5"
+{% macro twitter(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 20 20"
              aria-hidden="true">
@@ -9,9 +9,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro facebook() %}
-    <object>
-        <svg class="w-5 h-5"
+{% macro facebook(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 20 20"
              aria-hidden="true">
@@ -22,9 +22,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro github() %}
-    <object>
-        <svg class="w-5 h-5"
+{% macro github(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 20 20"
              aria-hidden="true">
@@ -35,9 +35,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro instagram() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro instagram(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 24 24"
              aria-hidden="true">
@@ -48,9 +48,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro dribble() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro dribble(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 24 24"
              aria-hidden="true">
@@ -61,9 +61,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro apple() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro apple(display='block') %}
+    <object class="{{ display }}">
+        <svg class="h-6 w-6 {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 315"
              aria-hidden="true">
@@ -74,9 +74,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro slack() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro slack(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 155 155"
              aria-hidden="true">
@@ -98,9 +98,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro google() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro google(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 262"
              aria-hidden="true">
@@ -122,9 +122,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro linkedin() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro linkedin(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 256"
              aria-hidden="true">
@@ -135,9 +135,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro django() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro django(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 256"
              aria-hidden="true">
@@ -148,9 +148,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro alpine() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro alpine(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 118"
              aria-hidden="true">
@@ -164,9 +164,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro discord() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro discord(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 199"
              aria-hidden="true">
@@ -177,9 +177,9 @@
         </svg>
     </object>
 {% endmacro %}
-{% macro signal() %}
-    <object>
-        <svg class="h-6 w-6"
+{% macro signal(display='block', size='6') %}
+    <object class="{{ display }}">
+        <svg class="h-{{ size }} w-{{ size }} {{ display }}"
              fill="currentColor"
              viewBox="0 0 256 256"
              aria-hidden="true">

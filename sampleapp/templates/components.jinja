@@ -2,6 +2,7 @@
 {% from 'components/button.jinja' import button %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
 {% from 'components/tabs.jinja' import tabs %}
+{% import 'svg/svg.jinja' as svg %}
 {% block title %}
     Components
 {% endblock title %}
@@ -82,6 +83,36 @@
         <div>
             <h2>Tabs</h2>
             {{ tabs() }}
-        </div>
-    </div>
+            {{ tabs(color="info", width="full") }}
+            {% set tab_name1 %}
+            Hello <span class="italic">There</span>{{ svg.signal('inline') }}
+        {% endset %}
+        {% set tab_name2 %}
+        <span class="font-bold">I</span><span class="overline">am</span><span class="italic">the</span>{{ svg.django('inline') }}
+    {% endset %}
+    {% set tab_name3 %}
+    {{ svg.alpine('alpine') }}
+{% endset %}
+{% set panel1 %}
+<h1>General Kenobi</h1>
+{% endset %}
+{% set panel2 %}
+<h1>Senate</h1>
+{% endset %}
+{% set panel3 %}
+<div id="current-time">{% include 'current_time.jinja' %}</div>
+<button type="button"
+        class="bg-white border border-black px-4 py-2"
+        class="w"
+        hx-push-url="false"
+        hx-get="/current-time/"
+        hx-target="#current-time"
+        hx-swap='innerHTML'>
+    Refresh time
+</button>
+{% endset %}
+{{ tabs(tab_style="container",color="error") }}
+{{ tabs([tab_name1, tab_name2, tab_name3], [panel1, panel2, panel3], color="success") }}
+</div>
+</div>
 {% endblock content %}
