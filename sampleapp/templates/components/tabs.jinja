@@ -1,0 +1,49 @@
+{% set panel1 %}
+<h1>Yoda</h1>
+{% endset %}
+{% set panel2 %}
+<h2>Yaddle</h2>
+{% endset %}
+{% set panel3 %}
+<h3>Grogu</h3>
+{% endset %}
+{% set panels = [panel1, panel2, panel3] %}
+{% set tab_names = ['Yoda', 'Yaddle', 'Grogu'] %}
+{% macro tabs(tab_names=tab_names, panels=panels, style="underline") %}
+    {% set selected="border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" %}
+    {% set not_selected="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" %}
+    <div x-data="{ selectedId: null, init() { // Set the first available tab on the page on page load. this.$nextTick(() => this.select(this.$id('tab', 1))) }, select(id) { this.selectedId = id }, isSelected(id) { return this.selectedId === id }, whichChild(el, parent) { return Array.from(parent.children).indexOf(el) + 1 } }"
+         x-id="['tab']"
+         class="max-w-3xl mx-auto">
+        <nav class="-mb-px flex space-x-8"
+             aria-label="Tabs"
+             x-ref="tablist"
+             role="tablist">
+            <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" -->
+            {% for tab_name in tab_names %}
+                <button :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                        @click="select($el.id)"
+                        @focus="select($el.id)"
+                        type="button"
+                        :tabindex="isSelected($el.id) ? 0 : -1"
+                        :aria-selected="isSelected($el.id)"
+                        :class="isSelected($el.id) ? '{{ selected }}' : '{{ not_selected }}'"
+                        role="tab">
+                    {{ tab_name }}
+                </button>
+            {% endfor %}
+        </nav>
+        <!-- Panels -->
+        <div role="tabpanels" class="bg-white border border-gray-200 rounded-b-md">
+            <!-- Panel -->
+            {% for panel in panels %}
+                <section x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                         :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                         role="tabpanel"
+                         class="p-8">
+                    {{ panel }}
+                </section>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
