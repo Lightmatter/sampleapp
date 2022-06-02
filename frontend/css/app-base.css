@@ -48,4 +48,8 @@
 
     line-height: 2.25rem;
   }
+
+  .display {
+    @apply text-9xl font-bold;
+  }
 }
