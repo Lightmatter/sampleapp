@@ -83,7 +83,9 @@
         <div>
             <h2>Tabs</h2>
             {{ tabs() }}
-            {{ tabs(color="info", width="full") }}
+            {{ tabs(tab_style="container",color="error") }}
+            {{ tabs(color="warning", width="full") }}
+            {{ tabs(color="info", tab_style="container", width="full", disabled=[2]) }}
             {% set tab_name1 %}
             Hello <span class="italic">There</span>{{ svg.signal('inline') }}
         {% endset %}
@@ -111,7 +113,6 @@
     Refresh time
 </button>
 {% endset %}
-{{ tabs(tab_style="container",color="error") }}
 {{ tabs([tab_name1, tab_name2, tab_name3], [panel1, panel2, panel3], color="success") }}
 </div>
 </div>
