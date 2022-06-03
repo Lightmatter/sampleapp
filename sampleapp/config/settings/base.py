@@ -5,6 +5,8 @@ from datetime import timedelta
 from django.core.exceptions import ImproperlyConfigured
 from environ import Env, Path
 
+from ..jinja2 import options
+
 root = Path(__file__) - 3
 
 env = Env()
@@ -71,6 +73,7 @@ THIRD_PARTY_APPS = [
     "cachalot",
     "django_extensions",
     "django_htmx",
+    "django_jinja",
     "django_vite",
     "django_components",
     "model_utils",
@@ -189,7 +192,15 @@ CONTEXT_PROCESSORS = [
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
+
 TEMPLATES = [
+    {
+        # https://niwi.nz/django-jinja/latest/
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [root("templates")],
+        "APP_DIRS": True,
+        "OPTIONS": options,
+    },
     {
         # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -210,7 +221,7 @@ TEMPLATES = [
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             "context_processors": CONTEXT_PROCESSORS,
         },
-    }
+    },
 ]
 
 # components settings
@@ -300,6 +311,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_TEMPLATE_EXTENSION = "jinja"
 
 # https://django-allauth.readthedocs.io/en/latest/forms.html#account-forms
 ACCOUNT_FORMS = {

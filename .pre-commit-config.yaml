@@ -42,7 +42,7 @@ repos:
         name: djlint
         entry: poetry run djlint --reformat
         language: system
-        types_or: [html]
+        types_or: [html,jinja]
 
 ## system
 -   repo: https://github.com/asottile/pyupgrade
