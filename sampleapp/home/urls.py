@@ -15,6 +15,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="components.jinja"),
         name="components",
     ),
+    path(
+        "components/radio/",
+        TemplateView.as_view(template_name="components/radio.jinja"),
+        name="components_radio",
+    ),
     path(r"error/", error, name="error"),
     path(r"", TemplateView.as_view(template_name="index.jinja"), name="home"),
 ]

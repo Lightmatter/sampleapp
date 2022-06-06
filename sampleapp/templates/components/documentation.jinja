@@ -1,0 +1,37 @@
+{% macro documentation(name, import_name, description, parameters, usage, usage_code) %}
+    <h1>{{ name }}</h1>
+    <h4 class="text-gray-400">{{ description }}</h4>
+    <h4>
+        Import:
+        {{ '{% from components/' + import_name + '.jinja import ' + import_name + ' %}' }}
+    </h4>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ parameters }}
+                {% for parameter in parameters %}
+                    <tr>
+                        <td>{{ parameter.name }}</td>
+                        <td>{{ parameter.type }}</td>
+                        <td>{{ parameter.example }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2>Usage</h2>
+        {{ usage }}
+    </div>
+    <div>
+        <h2>Usage Code</h2>
+        {{ usage_code }}
+    </div>
+{% endmacro %}
