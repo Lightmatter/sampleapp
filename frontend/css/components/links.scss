@@ -1,4 +1,8 @@
 .link {
+  @apply link-primary;
+}
+
+.link-primary {
   @apply cursor-pointer no-underline;
   @apply text-primary;
   @apply hover:underline;
