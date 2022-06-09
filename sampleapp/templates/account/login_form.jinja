@@ -1,5 +1,5 @@
-{% from 'django/forms/inputgroup.jinja' import inputgroup %}
-{% from 'django/forms/checkbox.jinja' import checkbox %}
+{% from 'django/forms/jinja2/inputgroup.jinja' import inputgroup %}
+{% from 'django/forms/jinja2/checkbox.jinja' import checkbox %}
 <div class="form-wrapper justify-between">
     {{ errors }}
     {% for field, errors in fields %}
