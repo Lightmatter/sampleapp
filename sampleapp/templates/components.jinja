@@ -1,12 +1,15 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/documentation.jinja' import documentation %}
 {# {% from 'components/radio.jinja' import radio %} #}
 {% block title %}
     Components
 {% endblock title %}
 {% block content %}
     <div class="container p-2">
+        {{ documentation(button, ['Button', 'button-click', 'normal', 'primary', 'rounded', 'md', 'button'], 'This is a button')}}
+        {#
         <h1>Components</h1>
         <div>
             <h2>Headings</h2>
@@ -79,7 +82,6 @@
             {{ toggle(color='warning', size="normal", icon=True) }}
             {{ toggle(color='error', size="normal", icon=True) }}
         </div>
-        {#
         <div>
             <h2>Radio</h2>
             {{ radio() }}

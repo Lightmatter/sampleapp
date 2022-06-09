@@ -1,26 +1,20 @@
-{% macro documentation(name, import_name, description, parameters, usage, usage_code) %}
-    <h1>{{ name }}</h1>
+{% macro documentation(macro, inputs, description='') %}
+    <h1>{{ macro.name }}</h1>
     <h4 class="text-gray-400">{{ description }}</h4>
-    <h4>
-        Import:
-        {{ '{% from components/' + import_name + '.jinja import ' + import_name + ' %}' }}
-    </h4>
+    <h4>Import: {{ '{% from components/' + macro.name + '.jinja import ' + macro.name + ' %}' }}</h4>
     <div>
         <table>
             <thead>
                 <tr>
                     <th>Parameter</th>
-                    <th>Type</th>
                     <th>Example</th>
                 </tr>
             </thead>
             <tbody>
-                {{ parameters }}
-                {% for parameter in parameters %}
+                {% for arg in macro.arguments %}
                     <tr>
-                        <td>{{ parameter.name }}</td>
-                        <td>{{ parameter.type }}</td>
-                        <td>{{ parameter.example }}</td>
+                        <td>{{ arg }}</td>
+                        <td>{{ inputs[loop.index0] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -28,10 +22,10 @@
     </div>
     <div>
         <h2>Usage</h2>
-        {{ usage }}
+        {{ macro(*inputs) }}
     </div>
     <div>
         <h2>Usage Code</h2>
-        {{ usage_code }}
+        {{ '{{ ' + macro.name + '("' + '", "'.join(inputs) + '") }}' }}
     </div>
 {% endmacro %}
