@@ -17,7 +17,7 @@ class HasAccountForm(forms.Form):
 
 
 class LoginForm(AllAuthLoginForm):
-    template_name = "account/login_form.html"
+    template_name = "account/login_form.jinja"
     remember = forms.BooleanField(
         help_text=_("For 2 weeks"),
         label=_("Remember Me"),
@@ -30,7 +30,7 @@ class LoginForm(AllAuthLoginForm):
 
 
 class SignupForm(AllAuthSignupForm):
-    template_name = "account/signup_form.html"
+    template_name = "account/signup_form.jinja"
 
     first_name = forms.CharField(
         label=_("First Name"),

@@ -1,0 +1,8 @@
+{% from 'django/forms/inputgroup.jinja' import inputgroup %}
+{% macro default(field, errors) %}
+    <div class="form-wrapper">
+        <span class="text-red">{{ errors }}</span>
+        {% for field, errors in fields %}{{ inputgroup(field, errors )}}{% endfor %}
+        {% for field in hidden_fields %}{{ field }}{% endfor %}
+    </div>
+{% endmacro %}
