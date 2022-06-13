@@ -1,0 +1,35 @@
+{% set default_steps %}
+{% macro stepper(steps=[], direction="horizontal", style="line", color="primary") %}
+    <nav aria-label="Progress">
+        <ol role="list"
+            class="space-y-4 {% if direction=='horizontal' %}flex space-y-0 space-x-8{% endif %}">
+            {% for step in steps %}
+                <li {% if direction=="horizontal" %}class="flex-1"{% endif %}>
+                    <!-- Completed Step -->
+                    {% if step.status == "completed " %}
+                        <a href="#"
+                           class="group pl-4 py-2 flex flex-col border-l-4 border-{{ color }} hover:border-{{ color }}-focus {% if direction=='horizontal' %}pl-0 pt-4 pb-0 border-l-0 border-t-4{% endif %}">
+                            <span class="text-xs text-{{ color }} font-semibold tracking-wide uppercase group-hover:text-{{ color }}-focus">
+                            {% elif step.status == "current" %}
+                                <a href="#"
+                                   class="pl-4 py-2 flex flex-col border-l-4 border-{{ color }} {% if direction=='horizontal' %}pl-0 pt-4 pb-0 border-l-0 border-t-4{% endif %}"
+                                   aria-current="step">
+                                    <span class="text-xs text-{{ color }} font-semibold tracking-wide uppercase">
+                                    {% elif step.status == 'upcoming' %}
+                                        <a href="#"
+                                           class="group pl-4 py-2 flex flex-col border-l-4 border-gray-200 hover:border-gray-300 {% if direction=='horizontal' %}pl-0 pt-4 pb-0 border-l-0 border-t-4{% endif %}">
+                                            <span class="text-xs text-gray-500 font-semibold tracking-wide uppercase group-hover:text-gray-700">
+                                            {% endif %}
+                                            {% if 'name' in step %}
+                                                {{ step.name }}
+                                            {% else %}
+                                                Step {{ loop.index1 }}
+                                            {% endif %}
+                                        </span>
+                                        <span class="text-sm font-medium">{{ step.info }}</span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </nav>
+                {% endmacro %}
