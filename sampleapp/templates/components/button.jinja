@@ -9,7 +9,7 @@
     {# Color support: primary, secondary, accent, success, info, warning, error #}
     {# Shape support: rounded, square, circle #}
     {# Size support: xs, sm, md, lg, xl #}
-    {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"-600" %}
+    {% set class="inline-flex items-center shadow-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"+color+"-content" %}
     {% if size == 'xs' %}
         {% set class = class + " px-2.5 py-1.5 text-xs" %}
     {% elif size == 'sm' %}
@@ -33,7 +33,8 @@
     {% endif %}
     <button type="{{ type }}"
             x-on:click="$dispatch('{{ dispatch_name }}', '{{ variant }} {{ color }} {{ shape }} {{ size }}')"
-            class="{{ class }}">
+            class="{{ class }}"
+            x-data>
         {{ button_content }}
     </button>
 {% endmacro %}
