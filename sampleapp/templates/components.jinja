@@ -1,7 +1,7 @@
 {% extends "base.jinja" %}
 {% from 'components/button.jinja' import button %}
-{% from 'components/stepper.jinja' import stepper %}
 {% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/stepper.jinja' import stepper %}
 {% block title %}
     Components
 {% endblock title %}
@@ -82,7 +82,9 @@
         <div>
             <h2>Stepper</h2>
             {{ stepper() }}
-            {{ stepper(direction='vertical') }}
+            {{ stepper(direction="vertical") }}
+            {{ stepper(style="circle") }}
+            {{ stepper(style="circle", direction="vertical") }}
         </div>
     </div>
 {% endblock content %}
