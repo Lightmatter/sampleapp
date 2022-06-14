@@ -35,8 +35,7 @@
                     {% elif style == "circle" %}
                         <nav aria-label="Progress">
                             <ol role="list"
-                                class
-                                {% if direction == "vertical" %}"overflow-hidden"{% elif direction == "horizontal" %}"flex items-center"{% endif %}>
+                                {% if direction == "vertical" %}class="overflow-hidden"{% elif direction == "horizontal" %}class="flex items-center"{% endif %}>
                                 {% for step in steps %}
                                     <li class="relative {% if direction == 'vertical' %}pb-10{% elif direction == 'horizontal' and loop.index != steps|length %}pr-8 sm:pr-20{% endif %}">
                                         {% if direction == "vertical" and loop.index != steps|length %}
@@ -58,54 +57,49 @@
                                         {% endif %}
                                         {% if step.status == "completed" %}
                                             <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                               {% if direction == "vertical" %}
-                                               class="relative flex items-start group"
-                                               {% elif direction == "horizontal" %}
-                                               class="relative w-8 h-8 flex items-center justify-center bg-{{ color }} rounded-full hover:bg-{{ color }}-focus">
+                                               {% if direction == "vertical" %} class="relative flex items-start group" {% elif direction == "horizontal" %} class="relative w-8 h-8 flex items-center justify-center bg-{{ color }} rounded-full hover:bg-{{ color }}-focus" {% endif %}>
+                                                <span class="h-9 flex items-center">
+                                                    <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-{{ color }} rounded-full group-hover:bg-{{ color }}-focus">
+                                                        <!-- Heroicon name: solid/check -->
+                                                        <svg class="w-5 h-5 text-white"
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             viewBox="0 0 20 20"
+                                                             fill="currentColor"
+                                                             aria-hidden="true">
+                                                            <path fill-rule="evenodd"
+                                                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                  clip-rule="evenodd"/>
+                                                        </svg>
+                                                    {% elif step.status == "current" %}
+                                                        <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
+                                                           {% if direction == "vertical" %} class="relative flex items-start group" {% elif direction == "horizontal" %} class="relative w-8 h-8 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full" {% endif %}
+                                                           aria-current="step">
+                                                            <span class="h-9 flex items-center" aria-hidden="true">
+                                                                <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full">
+                                                                    <span class="h-2.5 w-2.5 bg-{{ color }} rounded-full"></span>
+                                                                {% elif step.status == "upcoming" %}
+                                                                    <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
+                                                                       {% if direction == "vertical" %} class="relative flex items-start group" {% elif direction == "horizontal" %} class="group relative w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-gray-400" {% endif %}>
+                                                                        <span class="h-9 flex items-center" aria-hidden="true">
+                                                                            <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full group-hover:border-gray-400">
+                                                                                <span class="h-2.5 w-2.5 bg-transparent rounded-full group-hover:bg-gray-300"></span>
+                                                                            {% endif %}
+                                                                        </span>
+                                                                    </span>
+                                                                    <span class="ml-4 min-w-0 flex flex-col {% if direction=='horizontal' %}pl-0 pt-4 pb-0 border-l-0 border-t-4{% endif %}">
+                                                                        <span class="text-xs font-semibold tracking-wide uppercase">
+                                                                            {% if 'name' in step %}
+                                                                                {{ step.name }}
+                                                                            {% else %}
+                                                                                Step {{ loop.index1 }}
+                                                                            {% endif %}
+                                                                        </span>
+                                                                        <span class="text-sm text-gray-500">{{ step.description }}</span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ol>
+                                                </nav>
                                             {% endif %}
-                                            >
-                                            <span class="h-9 flex items-center">
-                                                <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-{{ color }} rounded-full group-hover:bg-{{ color }}-focus">
-                                                    <!-- Heroicon name: solid/check -->
-                                                    <svg class="w-5 h-5 text-white"
-                                                         xmlns="http://www.w3.org/2000/svg"
-                                                         viewBox="0 0 20 20"
-                                                         fill="currentColor"
-                                                         aria-hidden="true">
-                                                        <path fill-rule="evenodd"
-                                                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                              clip-rule="evenodd"/>
-                                                    </svg>
-                                                {% elif step.status == "current" %}
-                                                    <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                                       {% if direction == "horizontal" %} class="relative flex items-start group" {% elif direction == "vertical" %} class="relative w-8 h-8 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full" {% endif %}
-                                                       aria-current="step">
-                                                        <span class="h-9 flex items-center" aria-hidden="true">
-                                                            <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full">
-                                                                <span class="h-2.5 w-2.5 bg-{{ color }} rounded-full"></span>
-                                                            {% elif step.status == "upcoming" %}
-                                                                <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                                                   {% if direction == "vertical" %} class="relative flex items-start group" {% elif direction == "horizontal" %} class="group relative w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-gray-400" {% endif %}>
-                                                                    <span class="h-9 flex items-center" aria-hidden="true">
-                                                                        <span class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full group-hover:border-gray-400">
-                                                                            <span class="h-2.5 w-2.5 bg-transparent rounded-full group-hover:bg-gray-300"></span>
-                                                                        {% endif %}
-                                                                    </span>
-                                                                </span>
-                                                                <span class="ml-4 min-w-0 flex flex-col">
-                                                                    <span class="text-xs font-semibold tracking-wide uppercase">
-                                                                        {% if 'name' in step %}
-                                                                            {{ step.name }}
-                                                                        {% else %}
-                                                                            Step {{ loop.index1 }}
-                                                                        {% endif %}
-                                                                    </span>
-                                                                    <span class="text-sm text-gray-500">{{ step.description }}</span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ol>
-                                            </nav>
-                                        {% endif %}
-                                    {% endmacro %}
+                                        {% endmacro %}
