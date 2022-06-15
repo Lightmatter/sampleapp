@@ -1,7 +1,7 @@
 {% set default_radios = [{'name': 'C-3PO'}, {'name': 'R2-D2', 'help_text': 'These hyphens confuse nobody'}, {'name': 'BD-1', 'help_text': 'From the video game!'}, {'name': 'IG-11', 'help_text': 'From Mando'}] %}
 {% macro radio(radios=default_radios, title="Favorite Droid", subtitle="", dispatch_name='radio', color='primary') %}
     <form>
-        <div x-data="{ value: null, select(option) { this.value = option }, isSelected(option) { return this.value === option }, hasRovingTabindex(option, el) { if (this.value === null && Array.from(el.parentElement.children).indexOf(el) === 0) {return true}  return this.isSelected(option) }, }"
+        <div x-data="{value: null, select(option) { this.value = option }, isSelected(option) { return this.value === option }, hasRovingTabindex(option, el) { if (this.value === null && Array.from(el.parentElement.children).indexOf(el) === 0) {return true}  return this.isSelected(option) } }"
              role="radiogroup"
              :aria-labelledby="$id('radio-group-label')"
              x-id="['radio-group-label']">
@@ -39,22 +39,3 @@
         </div>
     </form>
 {% endmacro %}
-{% extends "base.jinja" %}
-{% block title %}
-    Radio Groups
-{% endblock title %}
-{% block content %}
-    {% from "components/documentation.jinja" import documentation %}
-    {% set usage %}
-    {{ radio([{'name': 'C-3PO'}, {'name': 'R2-D2', 'help_text': 'These hyphens confuse nobody'}, {'name': 'BD-1', 'help_text': 'From the video game!'}, {'name': 'IG-11', 'help_text': 'From Mando'}], 'Favorite Droid', '', 'radio', 'primary') }}
-{% endset %}
-{% set code %}
-{% raw %}
-    {{ radio([{'name': 'C-3PO'}, {'name': 'R2-D2', 'help_text': 'These hyphens confuse nobody'}, {'name': 'BD-1', 'help_text': 'From the video game!'}, {'name': 'IG-11', 'help_text': 'From Mando'}], 'Favorite Droid', '', 'radio', 'primary') }}
-{% endraw %}
-{% endset %}
-{{ documentation('Radio Groups',
-'radio',
-'Radio groups allow users to select one option from a set of options.',
-[{name: 'radios', type: 'array of objects with name and help_text properties', example: "[{'name': 'C-3PO'}, {'name': 'R2-D2', 'help_text': 'These hyphens confuse nobody'}, {'name': 'BD-1', 'help_text': 'From the video game!'}, {'name': 'IG-11', 'help_text': 'From Mando'}]"}, {name: 'title', type: 'string', example: 'Favorite Droid'}, {name: 'subtitle', type: 'string', example: 'These hyphens confuse nobody'}, {name: 'dispatch_name', type: 'string', example: 'radio'}, {name: 'color', type: 'string', example: 'primary | secondary | accemt | success | error | warning | info'}], usage, code) }}
-{% endblock content %}
