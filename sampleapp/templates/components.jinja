@@ -1,0 +1,88 @@
+{% extends "base.jinja" %}
+{% from 'components/button.jinja' import button %}
+{% from 'components/toggle.jinja' import toggle, toggle_label %}
+{% from 'components/radio.jinja' import radio %}
+{% block title %}
+    Components
+{% endblock title %}
+{% block content %}
+    <div class="container p-2">
+        <h1>Components</h1>
+        <div>
+            <h2>Headings</h2>
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <h4>Heading 4</h4>
+            <h5>Heading 5</h5>
+            <h6>Heading 6</h6>
+            <p>
+                Paragraph, <a href="#" class="link">link with link class</a>
+            </p>
+        </div>
+        <div>
+            <h2>Buttons</h2>
+            <div x-data="{ clicked: 'none' }"
+                 @button-click.window="clicked = $event.detail">
+                <h4>
+                    Clicked Button: <span x-text="clicked"></span>
+                </h4>
+                <div>
+                    <h3>Colors</h3>
+                    {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
+                    {{ button('secondary normal rounded', color='secondary', variant='normal', shape='rounded') }}
+                    {{ button('accent normal rounded', color='accent', variant='normal', shape='rounded') }}
+                    {{ button('success normal rounded', color='success', variant='normal', shape='rounded') }}
+                    {{ button('info normal rounded', color='info', variant='normal', shape='rounded') }}
+                    {{ button('warning normal rounded', color='warning', variant='normal', shape='rounded') }}
+                    {{ button('error normal rounded', color='error', variant='normal', shape='rounded') }}
+                </div>
+                <div>
+                    <h3>Shapes</h3>
+                    {{ button('primary normal rounded', color='primary', variant='normal', shape='rounded') }}
+                    {{ button('primary normal square', color='primary', variant='normal', shape='square') }}
+                    {{ button('primary normal circle', color='primary', variant='normal', shape='circle') }}
+                </div>
+                <div>
+                    <h3>Outlines</h3>
+                    {{ button('primary outline rounded', color='primary', variant='outline', shape='rounded') }}
+                    {{ button('secondary outline rounded', color='secondary', variant='outline', shape='rounded') }}
+                    {{ button('accent outline rounded', color='accent', variant='outline', shape='rounded') }}
+                    {{ button('success outline rounded', color='success', variant='outline', shape='rounded') }}
+                    {{ button('info outline rounded', color='info', variant='outline', shape='rounded') }}
+                    {{ button('warning outline rounded', color='warning', variant='outline', shape='rounded') }}
+                    {{ button('error outline rounded', color='error', variant='outline', shape='rounded') }}
+                </div>
+                <div>
+                    <h3>Sizes</h3>
+                    {{ button('primary normal rounded xs', color='primary', size="xs") }}
+                    {{ button('primary normal rounded sm', color='primary', size="sm") }}
+                    {{ button('primary normal rounded md', color='primary', size="md") }}
+                    {{ button('primary normal rounded lg', color='primary', size="lg") }}
+                    {{ button('primary normal rounded xl', color='primary', size="xl") }}
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Toggle</h2>
+            {{ toggle(color='primary', size="normal", icon=False) }}
+            {{ toggle(color='primary', size="normal", icon=True) }}
+            {{ toggle(color='primary', size="sm", icon=False) }}
+            {{ toggle(color='primary', size="sm", icon=True) }}
+            {{ toggle_label(side='left') }}
+            {{ toggle_label(side='right') }}
+            {{ toggle(color='primary', size="normal", icon=True) }}
+            {{ toggle(color='secondary', size="normal", icon=True) }}
+            {{ toggle(color='accent', size="normal", icon=True) }}
+            {{ toggle(color='success', size="normal", icon=True) }}
+            {{ toggle(color='info', size="normal", icon=True) }}
+            {{ toggle(color='warning', size="normal", icon=True) }}
+            {{ toggle(color='error', size="normal", icon=True) }}
+        </div>
+        <div>
+            <h2>Radio</h2>
+            {{ radio() }}
+            {{ radio(color='error') }}
+        </div>
+    </div>
+{% endblock content %}
