@@ -39,10 +39,10 @@
                                             <li class="relative {% if loop.index != steps|length %}pr-8 sm:pr-20{% endif %}">
                                                 <!-- Completed Step -->
                                                 <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                                                    {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-{{ color }}"></div>{% endif %}
+                                                    {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-{{ color }} mb-6"></div>{% endif %}
                                                 </div>
                                                 <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                                   class="relative w-8 h-8 mt-6 flex items-center justify-center bg-{{ color }} rounded-full hover:bg-{{ color }}-focus">
+                                                   class="relative w-8 h-8 flex items-center justify-center bg-{{ color }} rounded-full hover:bg-{{ color }}-focus">
                                                     <!-- Heroicon name: solid/check -->
                                                     <svg class="w-5 h-5 text-white"
                                                          xmlns="http://www.w3.org/2000/svg"
@@ -58,10 +58,10 @@
                                                 <li class="relative {% if loop.index != steps|length %}pr-8 sm:pr-20{% endif %}">
                                                     <!-- Current Step -->
                                                     <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                                                        {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-gray-200"></div>{% endif %}
+                                                        {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-gray-200 mb-6"></div>{% endif %}
                                                     </div>
                                                     <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                                       class="relative w-8 h-8 mt-6 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full"
+                                                       class="relative w-8 h-8 flex items-center justify-center bg-white border-2 border-{{ color }} rounded-full"
                                                        aria-current="step">
                                                         <span class="h-2.5 w-2.5 bg-{{ color }} rounded-full" aria-hidden="true"></span>
                                                     </a>
@@ -69,15 +69,15 @@
                                                     <li class="relative {% if loop.index != steps|length %}pr-8 sm:pr-20{% endif %}">
                                                         <!-- Upcoming Step -->
                                                         <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                                                            {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-gray-200"></div>{% endif %}
+                                                            {% if loop.index != steps|length %}<div class="h-0.5 w-full bg-gray-200 mb-6"></div>{% endif %}
                                                         </div>
                                                         <a {% if "link" in step %}href="{{ step.link }}"{% endif %}
-                                                           class="group relative w-8 h-8 mt-6 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-gray-400">
+                                                           class="group relative w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-gray-400">
                                                             <span class="h-2.5 w-2.5 bg-transparent rounded-full group-hover:bg-gray-300"
                                                                   aria-hidden="true"></span>
                                                         </a>
                                                     {% endif %}
-                                                    <span class="py-4 text-xs font-semibold tracking-wide uppercase">
+                                                    <span class="pt-4 text-xs font-semibold tracking-wide uppercase">
                                                         {% if 'name' in step %}
                                                             {{ step.name }}
                                                         {% else %}
