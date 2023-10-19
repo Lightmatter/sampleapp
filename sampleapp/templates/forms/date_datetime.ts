@@ -1,35 +1,47 @@
 import AlpineInstance, { AlpineComponent } from "alpinejs";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/themes/light.css";
-import { AlpineDataCallback } from "../../static_source/js";
 
-const dateTime = (eventName: string, value: string, enableTime: boolean): AlpineComponent => ({
-  eventName,
-  value,
-  enableTime,
-  init() {
-    if (this.value === "None") {
-      this.value = null;
-    }
+interface DateTime{
+  //callback requires indexing to string and symbol
+  [key: string]: unknown;
+  [key: symbol]: unknown;
+  //real types
+  eventName: string;
+  value: string;
+  enableTime: boolean;
+}
 
-    // see https://flatpickr.js.org/formatting/
-    const dateFormat = enableTime ? "m/d/Y H:i" : "m/d/Y";
+const dateTime = (...args: unknown[]): AlpineComponent<DateTime> => {
+  const [eventName, value, enableTime] = args as [string, string, boolean];
+  return {
+    eventName,
+    value,
+    enableTime,
+    init() {
+      if (this.value === "None") {
+        this.value = "";
+      }
 
-    const picker = flatpickr(this.$refs.picker, {
-      mode: "single",
-      enableTime,
-      dateFormat,
-      defaultDate: value,
-      onChange: (_, dateString) => {
-        this.value = dateString;
-      },
-    });
+      // see https://flatpickr.js.org/formatting/
+      const dateFormat = enableTime ? "m/d/Y H:i" : "m/d/Y";
 
-    this.$watch("value", () => {
-      picker.setDate(this.value);
-      if (this.eventName !== "") this.$dispatch(this.eventName, { value: this.value });
-    });
-  },
-});
+      const picker = flatpickr(this.$refs.picker, {
+        mode: "single",
+        enableTime,
+        dateFormat,
+        defaultDate: value,
+        onChange: (_, dateString) => {
+          this.value = dateString;
+        },
+      });
 
-AlpineInstance.data("dateTime", dateTime as AlpineDataCallback);
+      this.$watch("value", () => {
+        picker.setDate(this.value);
+        if (this.eventName !== "") this.$dispatch(this.eventName, { value: this.value });
+      });
+    },
+  }
+};
+
+AlpineInstance.data("dateTime", dateTime);

@@ -1,7 +1,6 @@
 import focus from "@alpinejs/focus";
 import mask from "@alpinejs/mask";
 import ui from "@alpinejs/ui";
-import morph from "@alpinejs/morph";
 
 import htmx from "htmx.org";
 import Alpine from "alpinejs";
@@ -35,22 +34,7 @@ htmx.defineExtension("get-timezone", {
   }
 });
 
-htmx.defineExtension('alpine-morph', {
-  isInlineSwap: function (swapStyle) {
-    return swapStyle === 'morph';
-  },
-  handleSwap: function (swapStyle, target, fragment) {
-    if (swapStyle === 'morph') {
-      if (fragment.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
-        Alpine.morph(target, fragment.firstElementChild);
-        return [target];
-      } else {
-        Alpine.morph(target, fragment.outerHTML);
-        return [target];
-      }
-    }
-  }
-});
+
 
 // This function will listen for HTMX errors and display the appropriate page
 // as needed. Without debug mode enabled, HTMX will normally refuse to
@@ -68,7 +52,8 @@ htmx.on("htmx:beforeOnLoad", (event:any) => {
 if (import.meta.hot) {
   import.meta.hot.on("template-hmr", () => {
     const dest = document.location.href;
-    htmx.ajax("GET", dest, { target: "body", swap: "morph" });
+    // change to morph when idiomorph is ready
+    htmx.ajax("GET", dest, { target: "body"});
   });
 }
 
@@ -76,5 +61,4 @@ window.Alpine = Alpine;
 Alpine.plugin(focus);
 Alpine.plugin(mask);
 Alpine.plugin(ui);
-Alpine.plugin(morph);
 Alpine.start();
